@@ -1,3 +1,5 @@
+local swap_node = minetest.swap_node
+
 local api = choppy.api
 
 minetest.register_on_dignode(function(pos, oldnode, digger)
@@ -17,27 +19,34 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 		return
 	end
 
-	local wielded = digger:get_wielded_item()
-	local wielded_name = wielded:get_name()
-	if not api.is_axe(wielded_name) then
-		-- not an axe
-		return
+	if api.is_wielding_axe(digger) and api.is_enabled(digger) then
+		api.start_process(digger, pos, oldnode.name)
 	end
+end)
 
-	local controls = digger:get_player_control()
-	if controls.sneak then
-		-- don't start a process
-		return
+minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack, pointed_thing)
+	local node_name = newnode.name
+	if api.is_tree_node(node_name) then
+		local def = minetest.registered_nodes[node_name]
+		if def.paramtype == "placed_by_player" then
+			newnode.param1 = 1
+			swap_node(pos, newnode)
+		end
 	end
-
-	api.start_process(digger, pos, oldnode.name)
 end)
 
 minetest.register_globalstep(function(dtime)
 	for _, player in ipairs(minetest.get_connected_players()) do
 		local player_name = player:get_player_name()
-		local controls = player:get_player_control()
-		if controls.is_sneaking then
+		local process = api.get_process(player_name)
+		if
+			process
+			and (
+				not api.is_enabled(player)
+				or not api.is_wielding_axe(player)
+				or not api.player_in_bounds(player:get_pos(), process.start_pos, process.tree_shape)
+			)
+		then
 			api.stop_process(player_name)
 		end
 	end

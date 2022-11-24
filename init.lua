@@ -12,6 +12,7 @@ choppy = {
 
 	modname = modname,
 	modpath = modpath,
+	mod_storage = minetest.get_mod_storage(),
 	S = S,
 
 	has = {},
@@ -25,8 +26,12 @@ choppy = {
 	end,
 }
 
+choppy.dofile("settings")
 choppy.dofile("util")
 choppy.dofile("api", "init")
 choppy.dofile("callbacks")
 choppy.dofile("known_axes")
 choppy.dofile("known_trees")
+choppy.dofile("commands")
+
+choppy.mod_storage = nil

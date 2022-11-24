@@ -119,14 +119,6 @@ if minetest.get_modpath("default") then
 		},
 	})
 
-	choppy.api.register_tree("default:jungletree", {
-		shape = { type = "prism", prism = vector.new(7, 26, 7) },
-		nodes = {
-			["default:jungletree"] = "trunk",
-			["default:jungleleaves"] = "leaves",
-		},
-	})
-
 	choppy.api.register_tree("default:pine_bush", {
 		shape = { type = "prism", prism = vector.new(3, 2, 3) },
 		nodes = {
@@ -464,10 +456,9 @@ if minetest.get_modpath("moretrees") then
 	})
 
 	choppy.api.register_tree("moretrees:jungletree", {
-		shape = { type = "prism", prism = vector.new(15, 30, 15) },
+		shape = { type = "prism", prism = vector.new(15, 35, 15) },
 		nodes = {
 			["moretrees:jungletree_trunk"] = "trunk",
-			["default:jungletree"] = "trunk",
 			["default:jungleleaves"] = "leaves",
 			["moretrees:jungletree_leaves_red"] = "leaves",
 			["moretrees:jungletree_leaves_yellow"] = "leaves",
