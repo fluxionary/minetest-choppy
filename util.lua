@@ -51,12 +51,12 @@ function util.get_dig_time(node_name, wielded, hand)
 	return time
 end
 
-function util.in_bounds(pos, start_pos, tree_shape)
-	if tree_shape.type == "prism" then
-		local prism = tree_shape.prism
-		return math.abs(pos.x - start_pos.x) <= (prism.x - 1)
-			and math.abs(pos.y - start_pos.y) <= (prism.y - 1)
-			and math.abs(pos.z - start_pos.z) <= (prism.z - 1)
+function util.in_bounds(pos, origin, shape)
+	if shape.type == "prism" then
+		local prism = shape.prism
+		return math.abs(pos.x - origin.x) <= (prism.x - 1) -- TODO allow configurable fudge factor
+			and math.abs(pos.y - origin.y) <= (prism.y - 1)
+			and math.abs(pos.z - origin.z) <= (prism.z - 1)
 	end
 
 	return false

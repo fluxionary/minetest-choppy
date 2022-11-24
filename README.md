@@ -1,6 +1,20 @@
 # choppy
 
-yet another treecutting mod
+yet another tree-cutting mod
+
+## differences from other tree-cutting mods
+
+* very little lag
+* doesn't try to violate protection
+* recognizes specific species of tree
+* recognizes tree boundaries (very approximate, but can be extended)
+* axes must be whitelisted (commonly known axe names are whitelisted by default)
+* can be "on by default"
+* differentiates player-built and natural trees
+  * overrides tree nodes
+    * paramtype1 becomes "placed_by_player"
+    * a player placing a tree node will set param1 = 1
+  * player-built tree nodes will be ignored
 
 # TODO
 
@@ -23,3 +37,5 @@ yet another treecutting mod
 * possibly allow cutting leaves quickly even when not wielded a sword...
 * perhaps cut the tree from the top down?
 * perhaps stop if the player un-equips an axe?
+* create API for adding tree shapes
+* probably should add a proper API to remove axes from the whitelist
