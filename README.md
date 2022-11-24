@@ -4,13 +4,15 @@ yet another tree-cutting mod
 
 ## differences from other tree-cutting mods
 
-* [x] very little lag
-* [x] doesn't try to violate protection
+* [x] no lag
+* [x] respects protection
 * [x] recognizes specific species of tree
 * [x] recognizes tree boundaries (very approximate, but can be extended)
 * [x] axes must be whitelisted (commonly known axe names are whitelisted by default)
 * [x] can be "on by default"
 * [x] differentiates player-built and natural trees if possible
+* [x] will automatically stop instead of breaking your axe
+* [x] digs nodes in proportion to the axe's true speed
 
 ### commands
 
