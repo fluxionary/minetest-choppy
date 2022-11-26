@@ -130,6 +130,7 @@ function Process:step_fringe()
 end
 
 function Process:ensure_positions()
+	self:step_fringe() -- expand the fringe slowly
 	local positions = self.positions
 	local fringe = self.fringe
 	while positions:size() == 0 and fringe:size() > 0 do
@@ -174,6 +175,7 @@ function Process:on_globalstep(dtime, player)
 
 			if not cancel_dig then
 				minetest.node_dig(pos, node, player)
+				wielded = player:get_wielded_item()
 				elapsed = elapsed - dig_time
 			end
 		end

@@ -32,11 +32,11 @@ function util.get_dig_time_and_wear(node_name, wielded, hand)
 		return
 	end
 
-	local dig_params = get_dig_params(node_def.groups or {}, wielded:get_tool_capabilities())
+	local dig_params = get_dig_params(node_def.groups or {}, wielded:get_tool_capabilities(), wielded:get_wear())
 	if dig_params.diggable then
 		return dig_params.time, dig_params.wear
 	else
-		dig_params = get_dig_params(node_def.groups or {}, hand:get_tool_capabilities())
+		dig_params = get_dig_params(node_def.groups or {}, hand:get_tool_capabilities(), hand:get_wear())
 
 		if dig_params.diggable then
 			return dig_params.time, 0
