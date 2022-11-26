@@ -26,6 +26,27 @@ function util.get_neighbors(pos)
 	end
 end
 
+function util.get_neighbors_above(pos)
+	local v_new = vector.new
+	local x0, y1, z0 = pos.x, pos.y + 1, pos.z
+	local ns = {
+		v_new(x0, y1, z0),
+		v_new(x0 - 1, y1, z0),
+		v_new(x0 + 1, y1, z0),
+		v_new(x0, y1, z0 - 1),
+		v_new(x0, y1, z0 + 1),
+		v_new(x0 - 1, y1, z0 - 1),
+		v_new(x0 - 1, y1, z0 + 1),
+		v_new(x0 + 1, y1, z0 - 1),
+		v_new(x0 + 1, y1, z0 + 1),
+	}
+	local i = 0
+	return function()
+		i = i + 1
+		return ns[i]
+	end
+end
+
 function util.get_dig_time_and_wear(node_name, wielded, hand)
 	local node_def = minetest.registered_nodes[node_name]
 	if not node_def then

@@ -1,8 +1,11 @@
 # number of nodes beyond the registered tree boundary, which should also be cut down
-choppy.halo_size (halo size) int 0 0 65535
+choppy.halo_size (halo size) int 1 0 65535
 
 # distance a player can be from a tree, proportional to the size of the tree
-choppy.player_scale (player scale) float 1 0.01
+choppy.player_scale (player scale) float 1.1 0.01
 
 # if true, leaves will be removed w/ the equivalent of a diamond sword. if false, the properties of the player's hand are used
 choppy.fast_leaves (fast leaf removal) bool true
+
+# radius to search for more tree nodes
+choppy.step_radius (search radius) int 2 1

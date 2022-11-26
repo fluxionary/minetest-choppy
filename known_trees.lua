@@ -1,8 +1,8 @@
 local has_mod = minetest.get_modpath
 local api = choppy.api
 
-if has_mod("baldcypruss") then
-	api.register_tree("cooltrees:baldcypruss", {
+if has_mod("baldcypress") then
+	api.register_tree("cooltrees:baldcypress", {
 		shape = { type = "prism", prism = vector.new(11, 19, 11) },
 		nodes = {
 			["baldcypress:trunk"] = "trunk",

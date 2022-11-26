@@ -22,7 +22,12 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 	end
 
 	if api.is_wielding_axe(digger) and api.is_enabled(digger) then
-		api.start_process(digger, pos, oldnode.name)
+		local treetop = api.find_treetop(pos, oldnode, player_name)
+		if treetop then
+			api.start_process(digger, treetop, oldnode.name)
+		else
+			api.start_process(digger, pos, oldnode.name)
+		end
 	end
 end)
 

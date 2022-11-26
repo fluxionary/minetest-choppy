@@ -1,5 +1,12 @@
 local abs = math.abs
 
+local get_node = minetest.get_node
+local hash_node_position = minetest.hash_node_position
+
+local sum = futil.math.sum
+
+local get_neighbors_above = choppy.util.get_neighbors_above
+
 local halo_size = choppy.settings.halo_size
 local player_scale = choppy.settings.player_scale
 
@@ -72,6 +79,22 @@ function api.is_tree_node(node_name, kind)
 	return false
 end
 
+function api.get_tree_and_kind(node_name)
+	local trees = rawget(api.trees_by_node, node_name)
+	if not trees then
+		return
+	end
+
+	local registered_trees = api.registered_trees
+
+	for _, tree_name in ipairs(trees) do
+		local node_kind = registered_trees[tree_name].nodes[node_name]
+		if node_kind then
+			return tree_name, node_kind
+		end
+	end
+end
+
 function api.is_same_tree(tree_name, node_name)
 	if not api.registered_trees[tree_name] then
 		error(string.format("unknown tree %s (%s)", tree_name, node_name))
@@ -108,6 +131,86 @@ function api.get_tree_image(tree_name)
 					end
 				end
 			end
+		end
+	end
+end
+
+function api.find_treetop(start_pos, node, player_name)
+	local get_us_time = minetest.get_us_time
+	local start = get_us_time()
+	local node_name = node.name
+	local tree_name, node_kind = api.get_tree_and_kind(node_name)
+	if not (tree_name and node_kind == "trunk") then
+		minetest.chat_send_all("find_treetop: not a trunk")
+		return
+	end
+	local tree_def = api.registered_trees[tree_name]
+	local tree_shape = tree_def.shape
+	local fringe = { start_pos }
+	local seen = {}
+	local registered_nodes = minetest.registered_nodes
+
+	local function is_valid_target(pos)
+		if minetest.is_protected(pos, player_name) then
+			return false
+		end
+
+		local target_node = get_node(pos)
+		local target_node_name = target_node.name
+		local node_type = api.is_same_tree(tree_name, target_node_name)
+		if not node_type then
+			return false
+		end
+
+		local def = registered_nodes[target_node_name] or {}
+		if def.paramtype == "placed_by_player" and target_node.param1 > 0 then
+			return false
+		end
+
+		return node_type
+	end
+
+	local function should_add_position(pos, hash)
+		return not seen[hash] and api.in_bounds(pos, start_pos, tree_shape) and is_valid_target(pos)
+	end
+
+	-- search upward and outward
+	while true do
+		local next_fringe = {}
+		local aboves = {}
+		for i = 1, #fringe do
+			aboves[#aboves + 1] = get_neighbors_above(fringe[i])
+		end
+		local o = 1
+		while o <= 9 and #next_fringe <= 9 do
+			for i = 1, #aboves do
+				local neighbor = aboves[i]()
+				local hash = hash_node_position(neighbor)
+				if should_add_position(neighbor, hash) then
+					next_fringe[#next_fringe + 1] = neighbor
+				end
+				seen[hash] = true
+			end
+			o = o + 1
+		end
+
+		if #next_fringe > 0 then
+			fringe = next_fringe
+		else
+			break
+		end
+	end
+
+	local v_distance = vector.distance
+	if #fringe > 0 then
+		local centroid = sum(fringe) / #fringe
+		table.sort(fringe, function(a, b)
+			return v_distance(a, centroid) < v_distance(b, centroid)
+		end)
+		minetest.chat_send_all(string.format("found treetop in %.03s", (get_us_time() - start) / 1e6))
+		local to_return = fringe[1]
+		if not vector.equals(start_pos, to_return) then
+			return to_return
 		end
 	end
 end

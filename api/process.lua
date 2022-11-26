@@ -48,7 +48,7 @@ function Process:_init(start_pos, player_name, tree_name)
 	self.positions = futil.Deque()
 	self.fringe = futil.Deque()
 	self.fringe:push_back(start_pos)
-	self.seen = { [hash_node_position(start_pos)] = true }
+	self.seen = {}
 	self.elapsed = 0
 end
 
@@ -149,6 +149,7 @@ function Process:on_globalstep(dtime, player)
 	end
 	local positions = self.positions
 	local pos = self:get_next_valid_target()
+	local node_dig = minetest.node_dig
 
 	while pos do
 		local node = get_node(pos)
@@ -174,7 +175,7 @@ function Process:on_globalstep(dtime, player)
 			end
 
 			if not cancel_dig then
-				minetest.node_dig(pos, node, player)
+				node_dig(pos, node, player)
 				wielded = player:get_wielded_item()
 				elapsed = elapsed - dig_time
 			end
@@ -192,7 +193,7 @@ end
 
 function api.start_process(player, start_pos, tree_node)
 	local player_name = player:get_player_name()
-	local tree_name = api.trees_by_node[tree_node][1]
+	local tree_name = assert(api.trees_by_node[tree_node][1], string.format("%q is not a tree node", tree_node))
 	local process = Process(start_pos, player_name, tree_name)
 	local found_targets = process:step_fringe()
 	while found_targets == false do

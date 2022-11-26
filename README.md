@@ -5,20 +5,26 @@ yet another tree-cutting mod
 ## differences from other tree-cutting mods
 
 * [x] no lag
-* [x] respects protection
-* [x] recognizes specific species of tree
+* [x] cuts from the top down
+* [x] recognizes specific species of tree (new trees must be registered)
 * [x] recognizes tree boundaries (very approximate, but can be extended)
 * [x] axes must be whitelisted (commonly known axe names are whitelisted by default)
+* [x] respects protection
 * [x] can be "on by default"
-* [x] differentiates player-built and natural trees if possible
-* [x] will automatically stop instead of breaking your axe
-* [x] digs nodes in proportion to the axe's true speed
+* [x] will automatically stop before breaking your axe
+* [x] digs nodes in proportion to the axe's true speed, and will "catch up" if there's lag.
+* [x] differentiates player-built and natural trees when possible
+  * NOTE: this only applies to structures built after this mod is installed.
 
 ### commands
 
 * `/toggle_choppy`
 
   toggles whether you have to hold down "sneak" to enable choppy, or whether it will be enabled by default.
+
+### settings
+
+see [settingtypes.txt]
 
 ### api
 
