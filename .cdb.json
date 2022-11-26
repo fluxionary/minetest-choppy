@@ -2,7 +2,7 @@
     "type": "MOD",
     "name": "choppy",
     "title": "choppy",
-    "dev_state": "BETA"
+    "dev_state": "BETA",
     "license": "AGPL-3.0-or-later",
     "media_license": "CC-BY-SA-4.0",
     "repo": "https://github.com/fluxionary/minetest-choppy.git",
