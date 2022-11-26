@@ -44,7 +44,7 @@ function api.update_hud(player_name)
 				alignment = { x = 0, y = 0 },
 				offset = { x = 0, y = 0 },
 				z_index = -1,
-				text = tree_image,
+				text = tree_image .. "^[resize:16x16",
 			})
 		end
 

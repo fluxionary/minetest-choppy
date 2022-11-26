@@ -1,5 +1,8 @@
-if minetest.get_modpath("baldcypruss") then
-	choppy.api.register_tree("cooltrees:baldcypruss", {
+local has_mod = minetest.get_modpath
+local api = choppy.api
+
+if has_mod("baldcypruss") then
+	api.register_tree("cooltrees:baldcypruss", {
 		shape = { type = "prism", prism = vector.new(11, 19, 11) },
 		nodes = {
 			["baldcypress:trunk"] = "trunk",
@@ -10,8 +13,8 @@ if minetest.get_modpath("baldcypruss") then
 	})
 end
 
-if minetest.get_modpath("birch") then
-	choppy.api.register_tree("cooltrees:birch", {
+if has_mod("birch") then
+	api.register_tree("cooltrees:birch", {
 		shape = { type = "prism", prism = vector.new(5, 6, 5) },
 		nodes = {
 			["birch:trunk"] = "trunk",
@@ -20,8 +23,8 @@ if minetest.get_modpath("birch") then
 	})
 end
 
-if minetest.get_modpath("cacaotree") then
-	choppy.api.register_tree("cooltrees:cacaotree", {
+if has_mod("cacaotree") then
+	api.register_tree("cooltrees:cacaotree", {
 		shape = { type = "prism", prism = vector.new(6, 7, 6) },
 		nodes = {
 			["cacaotree:trunk"] = "trunk",
@@ -33,8 +36,8 @@ if minetest.get_modpath("cacaotree") then
 	})
 end
 
-if minetest.get_modpath("cherrytree") then
-	choppy.api.register_tree("cooltrees:cherrytree", {
+if has_mod("cherrytree") then
+	api.register_tree("cooltrees:cherrytree", {
 		shape = { type = "prism", prism = vector.new(6, 7, 6) },
 		nodes = {
 			["cherrytree:trunk"] = "trunk",
@@ -45,8 +48,8 @@ if minetest.get_modpath("cherrytree") then
 	})
 end
 
-if minetest.get_modpath("chestnuttree") then
-	choppy.api.register_tree("cooltrees:chestnuttree", {
+if has_mod("chestnuttree") then
+	api.register_tree("cooltrees:chestnuttree", {
 		shape = { type = "prism", prism = vector.new(14, 13, 14) },
 		nodes = {
 			["chestnuttree:trunk"] = "trunk",
@@ -56,8 +59,8 @@ if minetest.get_modpath("chestnuttree") then
 	})
 end
 
-if minetest.get_modpath("clementinetree") then
-	choppy.api.register_tree("cooltrees:clementinetree", {
+if has_mod("clementinetree") then
+	api.register_tree("cooltrees:clementinetree", {
 		shape = { type = "prism", prism = vector.new(5, 6, 5) },
 		nodes = {
 			["clementinetree:trunk"] = "trunk",
@@ -67,8 +70,8 @@ if minetest.get_modpath("clementinetree") then
 	})
 end
 
-if minetest.get_modpath("clementinetree") then
-	choppy.api.register_tree("cooltrees:clementinetree", {
+if has_mod("clementinetree") then
+	api.register_tree("cooltrees:clementinetree", {
 		shape = { type = "prism", prism = vector.new(5, 6, 5) },
 		nodes = {
 			["clementinetree:trunk"] = "trunk",
@@ -78,8 +81,8 @@ if minetest.get_modpath("clementinetree") then
 	})
 end
 
-if minetest.get_modpath("default") then
-	choppy.api.register_tree("default:acacia_bush", {
+if has_mod("default") then
+	api.register_tree("default:acacia_bush", {
 		shape = { type = "prism", prism = vector.new(3, 2, 3) },
 		nodes = {
 			["default:acacia_bush_stem"] = "trunk",
@@ -87,7 +90,7 @@ if minetest.get_modpath("default") then
 		},
 	})
 
-	choppy.api.register_tree("default:acacia", {
+	api.register_tree("default:acacia", {
 		shape = { type = "prism", prism = vector.new(9, 9, 9) },
 		nodes = {
 			["default:acacia_tree"] = "trunk",
@@ -95,7 +98,7 @@ if minetest.get_modpath("default") then
 		},
 	})
 
-	choppy.api.register_tree("default:aspen", {
+	api.register_tree("default:aspen", {
 		shape = { type = "prism", prism = vector.new(5, 11, 5) },
 		nodes = {
 			["default:aspen_tree"] = "trunk",
@@ -103,7 +106,7 @@ if minetest.get_modpath("default") then
 		},
 	})
 
-	choppy.api.register_tree("default:bush", {
+	api.register_tree("default:bush", {
 		shape = { type = "prism", prism = vector.new(3, 2, 3) },
 		nodes = {
 			["default:bush_stem"] = "trunk",
@@ -111,7 +114,7 @@ if minetest.get_modpath("default") then
 		},
 	})
 
-	choppy.api.register_tree("default:jungletree", {
+	api.register_tree("default:jungletree", {
 		shape = { type = "prism", prism = vector.new(7, 26, 7) },
 		nodes = {
 			["default:jungletree"] = "trunk",
@@ -119,7 +122,7 @@ if minetest.get_modpath("default") then
 		},
 	})
 
-	choppy.api.register_tree("default:pine_bush", {
+	api.register_tree("default:pine_bush", {
 		shape = { type = "prism", prism = vector.new(3, 2, 3) },
 		nodes = {
 			["default:pine_bush_stem"] = "trunk",
@@ -127,7 +130,7 @@ if minetest.get_modpath("default") then
 		},
 	})
 
-	choppy.api.register_tree("default:pine", {
+	api.register_tree("default:pine", {
 		shape = { type = "prism", prism = vector.new(5, 15, 5) },
 		nodes = {
 			["default:pine_tree"] = "trunk",
@@ -135,7 +138,7 @@ if minetest.get_modpath("default") then
 		},
 	})
 
-	choppy.api.register_tree("default:tree", {
+	api.register_tree("default:tree", {
 		shape = { type = "prism", prism = vector.new(7, 7, 7) },
 		nodes = {
 			["default:tree"] = "trunk",
@@ -145,8 +148,8 @@ if minetest.get_modpath("default") then
 	})
 end
 
-if minetest.get_modpath("ebony") then
-	choppy.api.register_tree("cooltrees:ebony", {
+if has_mod("ebony") then
+	api.register_tree("cooltrees:ebony", {
 		shape = { type = "prism", prism = vector.new(11, 16, 11) },
 		nodes = {
 			["ebony:trunk"] = "trunk",
@@ -159,8 +162,8 @@ if minetest.get_modpath("ebony") then
 	})
 end
 
-if minetest.get_modpath("ethereal") then
-	choppy.api.register_tree("ethereal:bamboo", {
+if has_mod("ethereal") then
+	api.register_tree("ethereal:bamboo", {
 		shape = { type = "prism", prism = vector.new(3, 16, 3) },
 		nodes = {
 			["ethereal:bamboo"] = "trunk",
@@ -168,7 +171,7 @@ if minetest.get_modpath("ethereal") then
 		},
 	})
 
-	choppy.api.register_tree("ethereal:banana", {
+	api.register_tree("ethereal:banana", {
 		shape = { type = "prism", prism = vector.new(3, 16, 3) },
 		nodes = {
 			["ethereal:banana_trunk"] = "trunk",
@@ -177,7 +180,7 @@ if minetest.get_modpath("ethereal") then
 		},
 	})
 
-	choppy.api.register_tree("ethereal:birch", {
+	api.register_tree("ethereal:birch", {
 		shape = { type = "prism", prism = vector.new(5, 5, 5) },
 		nodes = {
 			["ethereal:birch_trunk"] = "trunk",
@@ -185,7 +188,7 @@ if minetest.get_modpath("ethereal") then
 		},
 	})
 
-	choppy.api.register_tree("ethereal:frost", {
+	api.register_tree("ethereal:frost", {
 		shape = { type = "prism", prism = vector.new(8, 15, 8) },
 		nodes = {
 			["ethereal:frost_tree"] = "trunk",
@@ -193,7 +196,7 @@ if minetest.get_modpath("ethereal") then
 		},
 	})
 
-	choppy.api.register_tree("ethereal:frost", {
+	api.register_tree("ethereal:frost", {
 		shape = { type = "prism", prism = vector.new(8, 15, 8) },
 		nodes = {
 			["ethereal:frost_tree"] = "trunk",
@@ -201,7 +204,7 @@ if minetest.get_modpath("ethereal") then
 		},
 	})
 
-	choppy.api.register_tree("ethereal:redwood", {
+	api.register_tree("ethereal:redwood", {
 		shape = { type = "prism", prism = vector.new(15, 30, 15) },
 		nodes = {
 			["ethereal:redwood_trunk"] = "trunk",
@@ -209,25 +212,12 @@ if minetest.get_modpath("ethereal") then
 		},
 	})
 
-	choppy.api.register_tree("ethereal:lemon", {
-		shape = { type = "prism", prism = vector.new(5, 7, 5) },
-		nodes = {
-			["default:tree"] = "trunk",
-			["ethereal:lemon_leaves"] = "leaves",
-			["ethereal:lemon"] = "fruit",
-		},
+	api.add_nodes_to_tree("default:tree", {
+		["ethereal:lemon_leaves"] = "leaves",
+		["ethereal:lemon"] = "fruit",
 	})
 
-	choppy.api.register_tree("ethereal:lemon", {
-		shape = { type = "prism", prism = vector.new(5, 7, 5) },
-		nodes = {
-			["default:tree"] = "trunk",
-			["ethereal:lemon_leaves"] = "leaves",
-			["ethereal:lemon"] = "fruit",
-		},
-	})
-
-	choppy.api.register_tree("ethereal:mushroom", {
+	api.register_tree("ethereal:mushroom", {
 		shape = { type = "prism", prism = vector.new(8, 11, 8) },
 		nodes = {
 			["ethereal:mushroom_trunk"] = "trunk",
@@ -236,7 +226,7 @@ if minetest.get_modpath("ethereal") then
 		},
 	})
 
-	choppy.api.register_tree("ethereal:olive", {
+	api.register_tree("ethereal:olive", {
 		shape = { type = "prism", prism = vector.new(8, 9, 8) },
 		nodes = {
 			["ethereal:olive_trunk"] = "trunk",
@@ -245,16 +235,12 @@ if minetest.get_modpath("ethereal") then
 		},
 	})
 
-	choppy.api.register_tree("ethereal:orange", {
-		shape = { type = "prism", prism = vector.new(5, 6, 5) },
-		nodes = {
-			["default:tree"] = "trunk",
-			["ethereal:orange_leaves"] = "leaves",
-			["ethereal:orange"] = "fruit",
-		},
+	api.add_nodes_to_tree("default:tree", {
+		["ethereal:orange_leaves"] = "leaves",
+		["ethereal:orange"] = "fruit",
 	})
 
-	choppy.api.register_tree("ethereal:palm", {
+	api.register_tree("ethereal:palm", {
 		shape = { type = "prism", prism = vector.new(7, 8, 7) },
 		nodes = {
 			["ethereal:palm_trunk"] = "trunk",
@@ -263,7 +249,7 @@ if minetest.get_modpath("ethereal") then
 		},
 	})
 
-	choppy.api.register_tree("ethereal:sakura", {
+	api.register_tree("ethereal:sakura", {
 		shape = { type = "prism", prism = vector.new(10, 9, 10) },
 		nodes = {
 			["ethereal:sakura_trunk"] = "trunk",
@@ -272,7 +258,7 @@ if minetest.get_modpath("ethereal") then
 		},
 	})
 
-	choppy.api.register_tree("ethereal:willow", {
+	api.register_tree("ethereal:willow", {
 		shape = { type = "prism", prism = vector.new(12, 13, 12) },
 		nodes = {
 			["ethereal:willow_trunk"] = "trunk",
@@ -280,7 +266,7 @@ if minetest.get_modpath("ethereal") then
 		},
 	})
 
-	choppy.api.register_tree("ethereal:yellow", {
+	api.register_tree("ethereal:yellow", {
 		shape = { type = "prism", prism = vector.new(9, 19, 9) },
 		nodes = {
 			["ethereal:yellow_trunk"] = "trunk",
@@ -290,8 +276,8 @@ if minetest.get_modpath("ethereal") then
 	})
 end
 
-if minetest.get_modpath("ferns") then
-	choppy.api.register_tree("ferns:giant_tree_fern", {
+if has_mod("ferns") then
+	api.register_tree("ferns:giant_tree_fern", {
 		shape = { type = "prism", prism = vector.new(9, 16, 9) },
 		nodes = {
 			["ferns:fern_trunk_big"] = "trunk",
@@ -302,7 +288,7 @@ if minetest.get_modpath("ferns") then
 		},
 	})
 
-	choppy.api.register_tree("ferns:tree_fern", {
+	api.register_tree("ferns:tree_fern", {
 		shape = { type = "prism", prism = vector.new(1, 10, 1) },
 		nodes = {
 			["ferns:fern_trunk "] = "trunk",
@@ -312,8 +298,8 @@ if minetest.get_modpath("ferns") then
 	})
 end
 
-if minetest.get_modpath("hollytree") then
-	choppy.api.register_tree("hollytree:hollytree", {
+if has_mod("hollytree") then
+	api.register_tree("hollytree:hollytree", {
 		shape = { type = "prism", prism = vector.new(10, 12, 10) },
 		nodes = {
 			["hollytree:trunk"] = "trunk",
@@ -322,8 +308,8 @@ if minetest.get_modpath("hollytree") then
 	})
 end
 
-if minetest.get_modpath("jacaranda") then
-	choppy.api.register_tree("jacaranda:jacaranda", {
+if has_mod("jacaranda") then
+	api.register_tree("jacaranda:jacaranda", {
 		shape = { type = "prism", prism = vector.new(7, 8, 7) },
 		nodes = {
 			["jacaranda:trunk"] = "trunk",
@@ -332,8 +318,8 @@ if minetest.get_modpath("jacaranda") then
 	})
 end
 
-if minetest.get_modpath("larch") then
-	choppy.api.register_tree("larch:larch", {
+if has_mod("larch") then
+	api.register_tree("larch:larch", {
 		shape = { type = "prism", prism = vector.new(11, 17, 11) },
 		nodes = {
 			["larch:trunk"] = "trunk",
@@ -343,8 +329,8 @@ if minetest.get_modpath("larch") then
 	})
 end
 
-if minetest.get_modpath("lemontree") then
-	choppy.api.register_tree("lemontree:lemontree", {
+if has_mod("lemontree") then
+	api.register_tree("lemontree:lemontree", {
 		shape = { type = "prism", prism = vector.new(5, 7, 5) },
 		nodes = {
 			["lemontree:trunk"] = "trunk",
@@ -354,8 +340,8 @@ if minetest.get_modpath("lemontree") then
 	})
 end
 
-if minetest.get_modpath("mahogany") then
-	choppy.api.register_tree("mahogany:mahogany", {
+if has_mod("mahogany") then
+	api.register_tree("mahogany:mahogany", {
 		shape = { type = "prism", prism = vector.new(5, 7, 5) },
 		nodes = {
 			["mahogany:trunk"] = "trunk",
@@ -367,8 +353,8 @@ if minetest.get_modpath("mahogany") then
 	})
 end
 
-if minetest.get_modpath("mahogany") then
-	choppy.api.register_tree("mahogany:mahogany", {
+if has_mod("mahogany") then
+	api.register_tree("mahogany:mahogany", {
 		shape = { type = "prism", prism = vector.new(7, 17, 7) },
 		nodes = {
 			["mahogany:trunk"] = "trunk",
@@ -380,8 +366,8 @@ if minetest.get_modpath("mahogany") then
 	})
 end
 
-if minetest.get_modpath("maple") then
-	choppy.api.register_tree("maple:maple", {
+if has_mod("maple") then
+	api.register_tree("maple:maple", {
 		shape = { type = "prism", prism = vector.new(10, 10, 10) },
 		nodes = {
 			["maple:trunk"] = "trunk",
@@ -390,8 +376,8 @@ if minetest.get_modpath("maple") then
 	})
 end
 
-if minetest.get_modpath("moretrees") then
-	choppy.api.register_tree("moretrees:apple", {
+if has_mod("moretrees") then
+	api.register_tree("moretrees:apple", {
 		shape = { type = "prism", prism = vector.new(18, 9, 18) },
 		nodes = {
 			["moretrees:apple_tree_trunk"] = "trunk",
@@ -401,7 +387,7 @@ if minetest.get_modpath("moretrees") then
 		},
 	})
 
-	choppy.api.register_tree("moretrees:beech", {
+	api.register_tree("moretrees:beech", {
 		shape = { type = "prism", prism = vector.new(9, 8, 9) },
 		nodes = {
 			["moretrees:beech_trunk"] = "trunk",
@@ -409,7 +395,7 @@ if minetest.get_modpath("moretrees") then
 		},
 	})
 
-	choppy.api.register_tree("moretrees:birch", {
+	api.register_tree("moretrees:birch", {
 		shape = { type = "prism", prism = vector.new(14, 24, 14) },
 		nodes = {
 			["moretrees:birch_trunk"] = "trunk",
@@ -417,7 +403,7 @@ if minetest.get_modpath("moretrees") then
 		},
 	})
 
-	choppy.api.register_tree("moretrees:cedar", {
+	api.register_tree("moretrees:cedar", {
 		shape = { type = "prism", prism = vector.new(15, 26, 15) },
 		nodes = {
 			["moretrees:cedar_trunk"] = "trunk",
@@ -426,7 +412,7 @@ if minetest.get_modpath("moretrees") then
 		},
 	})
 
-	choppy.api.register_tree("moretrees:date_palm", {
+	api.register_tree("moretrees:date_palm", {
 		shape = { type = "prism", prism = vector.new(23, 30, 23) },
 		nodes = {
 			["moretrees:date_palm_trunk"] = "trunk",
@@ -445,7 +431,7 @@ if minetest.get_modpath("moretrees") then
 		},
 	})
 
-	choppy.api.register_tree("moretrees:douglas_fir", {
+	api.register_tree("moretrees:douglas_fir", {
 		shape = { type = "prism", prism = vector.new(7, 22, 7) },
 		nodes = {
 			["moretrees:fir_trunk"] = "trunk",
@@ -455,7 +441,7 @@ if minetest.get_modpath("moretrees") then
 		},
 	})
 
-	choppy.api.register_tree("moretrees:jungletree", {
+	api.register_tree("moretrees:jungletree", {
 		shape = { type = "prism", prism = vector.new(15, 35, 15) },
 		nodes = {
 			["moretrees:jungletree_trunk"] = "trunk",
@@ -465,7 +451,7 @@ if minetest.get_modpath("moretrees") then
 		},
 	})
 
-	choppy.api.register_tree("moretrees:oak", {
+	api.register_tree("moretrees:oak", {
 		shape = { type = "prism", prism = vector.new(15, 15, 15) },
 		nodes = {
 			["moretrees:oak_trunk"] = "trunk",
@@ -474,7 +460,7 @@ if minetest.get_modpath("moretrees") then
 		},
 	})
 
-	choppy.api.register_tree("moretrees:palm", {
+	api.register_tree("moretrees:palm", {
 		shape = { type = "prism", prism = vector.new(18, 15, 18) },
 		nodes = {
 			["moretrees:palm_trunk"] = "trunk",
@@ -489,7 +475,7 @@ if minetest.get_modpath("moretrees") then
 		},
 	})
 
-	choppy.api.register_tree("moretrees:poplar", {
+	api.register_tree("moretrees:poplar", {
 		shape = { type = "prism", prism = vector.new(5, 26, 5) },
 		nodes = {
 			["moretrees:poplar_trunk"] = "trunk",
@@ -497,7 +483,7 @@ if minetest.get_modpath("moretrees") then
 		},
 	})
 
-	choppy.api.register_tree("moretrees:rubber", {
+	api.register_tree("moretrees:rubber", {
 		shape = { type = "prism", prism = vector.new(17, 13, 17) },
 		nodes = {
 			["moretrees:rubber_tree_trunk"] = "trunk",
@@ -506,7 +492,7 @@ if minetest.get_modpath("moretrees") then
 		},
 	})
 
-	choppy.api.register_tree("moretrees:sequoia", {
+	api.register_tree("moretrees:sequoia", {
 		shape = { type = "prism", prism = vector.new(18, 42, 18) },
 		nodes = {
 			["moretrees:sequoia_trunk"] = "trunk",
@@ -514,7 +500,7 @@ if minetest.get_modpath("moretrees") then
 		},
 	})
 
-	choppy.api.register_tree("moretrees:spruce", {
+	api.register_tree("moretrees:spruce", {
 		shape = { type = "prism", prism = vector.new(19, 34, 19) },
 		nodes = {
 			["moretrees:spruce_trunk"] = "trunk",
@@ -523,7 +509,7 @@ if minetest.get_modpath("moretrees") then
 		},
 	})
 
-	choppy.api.register_tree("moretrees:willow", {
+	api.register_tree("moretrees:willow", {
 		shape = { type = "prism", prism = vector.new(22, 14, 22) },
 		nodes = {
 			["moretrees:willow_trunk"] = "trunk",
@@ -532,8 +518,8 @@ if minetest.get_modpath("moretrees") then
 	})
 end
 
-if minetest.get_modpath("oak") then
-	choppy.api.register_tree("oak:oak", {
+if has_mod("oak") then
+	api.register_tree("oak:oak", {
 		shape = { type = "prism", prism = vector.new(11, 17, 11) },
 		nodes = {
 			["oak:trunk"] = "trunk",
@@ -543,8 +529,8 @@ if minetest.get_modpath("oak") then
 	})
 end
 
-if minetest.get_modpath("palm") then
-	choppy.api.register_tree("palm:palm", {
+if has_mod("palm") then
+	api.register_tree("palm:palm", {
 		shape = { type = "prism", prism = vector.new(7, 6, 7) },
 		nodes = {
 			["palm:trunk"] = "trunk",
@@ -554,8 +540,8 @@ if minetest.get_modpath("palm") then
 	})
 end
 
-if minetest.get_modpath("plumtree") then
-	choppy.api.register_tree("plumtree:plumtree", {
+if has_mod("plumtree") then
+	api.register_tree("plumtree:plumtree", {
 		shape = { type = "prism", prism = vector.new(9, 11, 9) },
 		nodes = {
 			["plumtree:trunk"] = "trunk",
@@ -565,8 +551,8 @@ if minetest.get_modpath("plumtree") then
 	})
 end
 
-if minetest.get_modpath("pomegranate") then
-	choppy.api.register_tree("pomegranate:pomegranate", {
+if has_mod("pomegranate") then
+	api.register_tree("pomegranate:pomegranate", {
 		shape = { type = "prism", prism = vector.new(3, 5, 3) },
 		nodes = {
 			["pomegranate:trunk"] = "trunk",
@@ -576,8 +562,8 @@ if minetest.get_modpath("pomegranate") then
 	})
 end
 
-if minetest.get_modpath("sequoia") then
-	choppy.api.register_tree("sequoia:sequoia", {
+if has_mod("sequoia") then
+	api.register_tree("sequoia:sequoia", {
 		shape = { type = "prism", prism = vector.new(17, 48, 17) },
 		nodes = {
 			["sequoia:trunk"] = "trunk",
@@ -586,8 +572,8 @@ if minetest.get_modpath("sequoia") then
 	})
 end
 
-if minetest.get_modpath("willow") then
-	choppy.api.register_tree("willow:willow", {
+if has_mod("willow") then
+	api.register_tree("willow:willow", {
 		shape = { type = "prism", prism = vector.new(10, 12, 10) },
 		nodes = {
 			["willow:trunk"] = "trunk",

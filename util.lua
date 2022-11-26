@@ -1,15 +1,19 @@
 local get_dig_params = minetest.get_dig_params
 
+local step_radius = choppy.settings.step_radius
+
 local util = {}
 
 function util.get_neighbors(pos)
+	local v_new = vector.new
+	local sr = step_radius
 	local x0, y0, z0 = pos.x, pos.y, pos.z
 	local ns = {}
-	for x = -1, 1 do
-		for y = -1, 1 do
-			for z = -1, 1 do
+	for x = -sr, sr do
+		for y = -sr, sr do
+			for z = -sr, sr do
 				if not (x == 0 and y == 0 and z == 0) then
-					ns[#ns + 1] = { x = x0 + x, y = y0 + y, z = z0 + z }
+					ns[#ns + 1] = v_new(x0 + x, y0 + y, z0 + z)
 				end
 			end
 		end

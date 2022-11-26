@@ -1,5 +1,7 @@
 local swap_node = minetest.swap_node
 
+local resolve_item = futil.resolve_item
+
 local api = choppy.api
 
 minetest.register_on_dignode(function(pos, oldnode, digger)
@@ -57,4 +59,38 @@ end)
 minetest.register_on_leaveplayer(function(player, timed_out)
 	local player_name = player:get_player_name()
 	api.stop_process(player_name)
+end)
+
+minetest.register_on_dieplayer(function(player, reason)
+	local player_name = player:get_player_name()
+	api.stop_process(player_name)
+end)
+
+minetest.register_on_mods_loaded(function()
+	-- resolve alias nodes
+	-- we assume that all aliasing has happened at this point
+	for tree_name, def in pairs(api.registered_trees) do
+		local nodes = {}
+		for node, type in pairs(def.nodes) do
+			local resolved = resolve_item(node)
+			if resolved then
+				nodes[resolved] = type
+
+				-- indicate that a node is natural or placed by a player
+				local node_def = minetest.registered_nodes[resolved]
+				local paramtype = node_def.paramtype
+				if not paramtype or paramtype == "" or paramtype == "none" then
+					minetest.override_item(resolved, {
+						paramtype = "placed_by_player",
+					})
+				end
+			end
+		end
+		def.nodes = nodes
+
+		-- create the trees by node index
+		for node_name, type in pairs(nodes) do
+			table.insert(api.trees_by_node[node_name], tree_name)
+		end
+	end
 end)

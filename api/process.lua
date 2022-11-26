@@ -19,17 +19,20 @@ fast_hand:get_meta():set_tool_capabilities({
 
 local api = choppy.api
 
+api.process_by_player = {}
+
 api.registered_on_choppy_starts = {}
+api.registered_on_choppy_stops = {}
+api.registered_on_before_chops = {}
+
 function api.register_on_choppy_start(callback)
 	table.insert(api.registered_on_choppy_starts, callback)
 end
 
-api.registered_on_choppy_stops = {}
 function api.register_on_choppy_stop(callback)
 	table.insert(api.registered_on_choppy_stops, callback)
 end
 
-api.registered_on_before_chops = {}
 function api.register_on_before_chop(callback)
 	table.insert(api.registered_on_before_chops, callback)
 end
@@ -64,7 +67,8 @@ function Process:is_valid_target(pos)
 
 	local node = get_node(pos)
 	local node_name = node.name
-	if not api.is_same_tree(self.tree_name, node_name) then
+	local node_type = api.is_same_tree(self.tree_name, node_name)
+	if not node_type then
 		return false
 	end
 
@@ -73,7 +77,7 @@ function Process:is_valid_target(pos)
 		return false
 	end
 
-	return true
+	return node_type
 end
 
 function Process:get_next_valid_target()
@@ -108,8 +112,14 @@ function Process:step_fringe()
 
 	for neighbor in get_neighbors(next_pos) do
 		local hash = hash_node_position(neighbor)
-		if self:should_add_position(neighbor, hash) then
-			positions:push_back(neighbor)
+		local node_type = self:should_add_position(neighbor, hash)
+		if node_type then
+			if node_type == "trunk" or node_type == "leaves" then
+				positions:push_back(neighbor)
+			else
+				-- prioritize fruit
+				positions:push_front(neighbor)
+			end
 			fringe:push_back(neighbor)
 			any_added = true
 		end
@@ -173,8 +183,6 @@ function Process:on_globalstep(dtime, player)
 
 	self.elapsed = elapsed
 end
-
-api.process_by_player = {}
 
 function api.get_process(player_name)
 	return api.process_by_player[player_name]
