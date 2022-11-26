@@ -136,12 +136,9 @@ function api.get_tree_image(tree_name)
 end
 
 function api.find_treetop(start_pos, node, player_name)
-	local get_us_time = minetest.get_us_time
-	local start = get_us_time()
 	local node_name = node.name
 	local tree_name, node_kind = api.get_tree_and_kind(node_name)
 	if not (tree_name and node_kind == "trunk") then
-		minetest.chat_send_all("find_treetop: not a trunk")
 		return
 	end
 	local tree_def = api.registered_trees[tree_name]
@@ -207,7 +204,6 @@ function api.find_treetop(start_pos, node, player_name)
 		table.sort(fringe, function(a, b)
 			return v_distance(a, centroid) < v_distance(b, centroid)
 		end)
-		minetest.chat_send_all(string.format("found treetop in %.03s", (get_us_time() - start) / 1e6))
 		local to_return = fringe[1]
 		if not vector.equals(start_pos, to_return) then
 			return to_return
