@@ -1,10 +1,11 @@
+local private_state = ...
+local mod_storage = private_state.mod_storage
+
 local f = string.format
 
 local is_yes = minetest.is_yes
 
 local api = choppy.api
-
-local mod_storage = choppy.mod_storage
 
 local cache = {}
 

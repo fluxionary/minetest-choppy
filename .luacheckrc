@@ -650,6 +650,7 @@ stds.choppy = {
 		"choppy",
 	},
 	read_globals = {
+		"fmod",
 		"futil",
 	},
 }

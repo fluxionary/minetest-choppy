@@ -2,11 +2,10 @@
     "type": "MOD",
     "name": "choppy",
     "title": "choppy",
-    "dev_state": "BETA",
+    "short_description": "yet another tree-cutting mod",
     "license": "AGPL-3.0-or-later",
     "media_license": "CC-BY-SA-4.0",
     "repo": "https://github.com/fluxionary/minetest-choppy.git",
     "website": "https://github.com/fluxionary/minetest-choppy",
-    "issue_tracker": "https://github.com/fluxionary/minetest-choppy/issues",
-    "short_description": "yet another tree-cutting mod"
+    "issue_tracker": "https://github.com/fluxionary/minetest-choppy/issues"
 }
