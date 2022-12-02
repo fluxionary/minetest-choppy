@@ -9,3 +9,6 @@ choppy.fast_leaves (fast leaf removal) bool true
 
 # radius to search for more tree nodes
 choppy.step_radius (search radius) int 2 1
+
+# 2 means "twice as fast"; 0.5 means "half as fast".
+choppy.dig_speed_multiplier (dig speed multiplier) float 1 0.0000000001 inf

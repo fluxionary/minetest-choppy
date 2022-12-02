@@ -1,5 +1,6 @@
 local get_dig_params = minetest.get_dig_params
 
+local multiplier = choppy.settings.dig_speed_multiplier
 local step_radius = choppy.settings.step_radius
 
 local util = {}
@@ -55,12 +56,12 @@ function util.get_dig_time_and_wear(node_name, wielded, hand)
 
 	local dig_params = get_dig_params(node_def.groups or {}, wielded:get_tool_capabilities(), wielded:get_wear())
 	if dig_params.diggable then
-		return dig_params.time, dig_params.wear
+		return dig_params.time / multiplier, dig_params.wear
 	else
 		dig_params = get_dig_params(node_def.groups or {}, hand:get_tool_capabilities(), hand:get_wear())
 
 		if dig_params.diggable then
-			return dig_params.time, 0
+			return dig_params.time / multiplier, 0
 		end
 	end
 end
