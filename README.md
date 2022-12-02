@@ -7,10 +7,17 @@ yet another tree-cutting mod
 * [x] no lag
 * [x] cuts from the top down
 * [x] recognizes specific species of tree (new trees must be registered)
+
+  please ask me to add more trees! PRs or descriptions of the node IDs and tree size are appreciated,
+  but i will add most or all trees :)
+
 * [x] recognizes tree boundaries (very approximate, but can be extended)
 * [x] axes must be whitelisted (commonly known axe names are whitelisted by default)
+
+  please ask me to add your preferred axes!
+
 * [x] respects protection
-* [x] can be "on by default"
+* [x] can be "on by default" - allows new players to discover the mechanic naturally.
 * [x] will automatically stop before breaking your axe
 * [x] digs nodes in proportion to the axe's true speed, and will "catch up" if there's lag.
 * [x] differentiates player-built and natural trees when possible
