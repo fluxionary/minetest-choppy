@@ -581,3 +581,34 @@ if has_mod("willow") then
 		},
 	})
 end
+
+if has_mod("x_farming") then
+	api.register_tree("x_farming:kiwi", {
+		shape = { type = "prism", prism = vector.new(5, 4, 5) },
+		nodes = {
+			["x_farming:kiwi_tree"] = "trunk",
+			["x_farming:kiwi_leaves"] = "leaves",
+			["x_farming:kiwi"] = "fruit",
+		},
+	})
+
+	api.register_tree("x_farming:cocoa", {
+		shape = { type = "prism", prism = vector.new(5, 18, 5) },
+		nodes = {
+			["x_farming:jungle_tree"] = "trunk",
+			["x_farming:jungle_leaves"] = "leaves",
+			["x_farming:cocoa_1"] = "fruit",
+			["x_farming:cocoa_2"] = "fruit",
+			["x_farming:cocoa_3"] = "fruit",
+		},
+	})
+
+	api.register_tree("x_farming:", {
+		shape = { type = "prism", prism = vector.new(5, 7, 5) },
+		nodes = {
+			["x_farming:pine_nut_tree"] = "trunk",
+			["x_farming:pine_nut_leaves"] = "leaves",
+			["x_farming:pine_nut"] = "fruit",
+		},
+	})
+end
