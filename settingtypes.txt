@@ -4,7 +4,7 @@ choppy.halo_size (halo size) int 1 0 65535
 # distance a player can be from a tree, proportional to the size of the tree
 choppy.player_scale (player scale) float 1.1 0.01
 
-# if true, leaves will be removed w/ the equivalent of a diamond sword. if false, the properties of the player's hand are used
+# if true, leaves will be removed w/ the equivalent of a diamond sword. if false, the properties of the player's hand are used, if the axe cannot break leaves.
 choppy.fast_leaves (fast leaf removal) bool true
 
 # radius to search for more tree nodes
