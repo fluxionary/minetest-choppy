@@ -36,6 +36,17 @@ if has_mod("cacaotree") then
 	})
 end
 
+if has_mod("caverealms") then
+	api.register_tree("caverealms:mushroom", {
+		shape = { type = "prism", prism = vector.new(8, 11, 8) },
+		nodes = {
+			["caverealms:mushroom_stem"] = "trunk",
+			["caverealms:mushroom_cap"] = "trunk",
+			["caverealms:mushroom_gills"] = "trunk",
+		},
+	})
+end
+
 if has_mod("cherrytree") then
 	api.register_tree("cooltrees:cherrytree", {
 		shape = { type = "prism", prism = vector.new(6, 7, 6) },
