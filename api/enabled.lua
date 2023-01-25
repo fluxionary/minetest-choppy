@@ -25,6 +25,7 @@ end
 function api.toggle_enabled(player_name)
 	local key = f("toggled:%s", player_name)
 	local toggled = is_yes(mod_storage:get(key))
+	cache[player_name] = not toggled
 	if toggled then
 		mod_storage:set_string(key, "")
 		return false
