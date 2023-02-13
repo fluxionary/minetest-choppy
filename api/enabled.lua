@@ -9,28 +9,35 @@ local api = choppy.api
 
 local cache = {}
 
+local function toggled_key(player_name)
+	return f("toggled:%s", player_name)
+end
+
+local function get_toggled(player_name)
+	local toggled = cache[player_name]
+	if toggled == nil then
+		toggled = is_yes(mod_storage:get(toggled_key(player_name)))
+		cache[player_name] = toggled
+	end
+	return toggled
+end
+
 function api.is_enabled(player)
 	local player_name = player:get_player_name()
 	local control = player:get_player_control()
-	local toggled = cache[player_name]
-	if toggled == nil then
-		local key = f("toggled:%s", player_name)
-		toggled = is_yes(mod_storage:get(key))
-		cache[player_name] = toggled
-	end
+	local toggled = get_toggled(player_name)
 
 	return (toggled and control.sneak) or (not toggled and not control.sneak)
 end
 
 function api.toggle_enabled(player_name)
-	local key = f("toggled:%s", player_name)
-	local toggled = is_yes(mod_storage:get(key))
-	cache[player_name] = not toggled
+	local key = toggled_key(player_name)
+	local toggled = not get_toggled(player_name)
 	if toggled then
-		mod_storage:set_string(key, "")
-		return false
-	else
 		mod_storage:set_string(key, "y")
-		return true
+	else
+		mod_storage:set_string(key, "")
 	end
+	cache[player_name] = toggled
+	return toggled
 end
