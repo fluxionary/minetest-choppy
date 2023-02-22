@@ -3,7 +3,7 @@ local api = choppy.api
 
 if has_mod("baldcypress") then
 	api.register_tree("cooltrees:baldcypress", {
-		shape = { type = "prism", prism = vector.new(11, 19, 11) },
+		shape = { type = "box", box = vector.new(11, 19, 11) },
 		nodes = {
 			["baldcypress:trunk"] = "trunk",
 			["baldcypress:leaves"] = "leaves",
@@ -15,7 +15,7 @@ end
 
 if has_mod("birch") then
 	api.register_tree("cooltrees:birch", {
-		shape = { type = "prism", prism = vector.new(5, 6, 5) },
+		shape = { type = "box", box = vector.new(5, 6, 5) },
 		nodes = {
 			["birch:trunk"] = "trunk",
 			["birch:leaves"] = "leaves",
@@ -25,7 +25,7 @@ end
 
 if has_mod("cacaotree") then
 	api.register_tree("cooltrees:cacaotree", {
-		shape = { type = "prism", prism = vector.new(6, 7, 6) },
+		shape = { type = "box", box = vector.new(6, 7, 6) },
 		nodes = {
 			["cacaotree:trunk"] = "trunk",
 			["cacaotree:leaves"] = "leaves",
@@ -38,7 +38,7 @@ end
 
 if has_mod("caverealms") then
 	api.register_tree("caverealms:mushroom", {
-		shape = { type = "prism", prism = vector.new(8, 11, 8) },
+		shape = { type = "box", box = vector.new(8, 11, 8) },
 		nodes = {
 			["caverealms:mushroom_stem"] = "trunk",
 			["caverealms:mushroom_cap"] = "trunk",
@@ -49,7 +49,7 @@ end
 
 if has_mod("cherrytree") then
 	api.register_tree("cooltrees:cherrytree", {
-		shape = { type = "prism", prism = vector.new(6, 7, 6) },
+		shape = { type = "box", box = vector.new(6, 7, 6) },
 		nodes = {
 			["cherrytree:trunk"] = "trunk",
 			["cherrytree:leaves"] = "leaves",
@@ -61,7 +61,7 @@ end
 
 if has_mod("chestnuttree") then
 	api.register_tree("cooltrees:chestnuttree", {
-		shape = { type = "prism", prism = vector.new(14, 13, 14) },
+		shape = { type = "box", box = vector.new(14, 13, 14) },
 		nodes = {
 			["chestnuttree:trunk"] = "trunk",
 			["chestnuttree:leaves"] = "leaves",
@@ -72,7 +72,7 @@ end
 
 if has_mod("clementinetree") then
 	api.register_tree("cooltrees:clementinetree", {
-		shape = { type = "prism", prism = vector.new(5, 6, 5) },
+		shape = { type = "box", box = vector.new(5, 6, 5) },
 		nodes = {
 			["clementinetree:trunk"] = "trunk",
 			["clementinetree:leaves"] = "leaves",
@@ -83,7 +83,7 @@ end
 
 if has_mod("clementinetree") then
 	api.register_tree("cooltrees:clementinetree", {
-		shape = { type = "prism", prism = vector.new(5, 6, 5) },
+		shape = { type = "box", box = vector.new(5, 6, 5) },
 		nodes = {
 			["clementinetree:trunk"] = "trunk",
 			["clementinetree:leaves"] = "leaves",
@@ -94,7 +94,7 @@ end
 
 if has_mod("default") then
 	api.register_tree("default:acacia_bush", {
-		shape = { type = "prism", prism = vector.new(3, 2, 3) },
+		shape = { type = "box", box = vector.new(3, 2, 3) },
 		nodes = {
 			["default:acacia_bush_stem"] = "trunk",
 			["default:acacia_bush_leaves"] = "leaves",
@@ -102,7 +102,7 @@ if has_mod("default") then
 	})
 
 	api.register_tree("default:acacia", {
-		shape = { type = "prism", prism = vector.new(9, 9, 9) },
+		shape = { type = "box", box = vector.new(9, 9, 9) },
 		nodes = {
 			["default:acacia_tree"] = "trunk",
 			["default:acacia_leaves"] = "leaves",
@@ -110,7 +110,7 @@ if has_mod("default") then
 	})
 
 	api.register_tree("default:aspen", {
-		shape = { type = "prism", prism = vector.new(5, 11, 5) },
+		shape = { type = "box", box = vector.new(5, 11, 5) },
 		nodes = {
 			["default:aspen_tree"] = "trunk",
 			["default:aspen_leaves"] = "leaves",
@@ -118,7 +118,7 @@ if has_mod("default") then
 	})
 
 	api.register_tree("default:bush", {
-		shape = { type = "prism", prism = vector.new(3, 2, 3) },
+		shape = { type = "box", box = vector.new(3, 2, 3) },
 		nodes = {
 			["default:bush_stem"] = "trunk",
 			["default:bush_leaves"] = "leaves",
@@ -126,7 +126,7 @@ if has_mod("default") then
 	})
 
 	api.register_tree("default:jungletree", {
-		shape = { type = "prism", prism = vector.new(7, 26, 7) },
+		shape = { type = "box", box = vector.new(7, 26, 7) },
 		nodes = {
 			["default:jungletree"] = "trunk",
 			["default:jungleleaves"] = "leaves",
@@ -134,7 +134,7 @@ if has_mod("default") then
 	})
 
 	api.register_tree("default:pine_bush", {
-		shape = { type = "prism", prism = vector.new(3, 2, 3) },
+		shape = { type = "box", box = vector.new(3, 2, 3) },
 		nodes = {
 			["default:pine_bush_stem"] = "trunk",
 			["default:pine_bush_needles"] = "leaves",
@@ -142,7 +142,7 @@ if has_mod("default") then
 	})
 
 	api.register_tree("default:pine", {
-		shape = { type = "prism", prism = vector.new(5, 15, 5) },
+		shape = { type = "box", box = vector.new(5, 15, 5) },
 		nodes = {
 			["default:pine_tree"] = "trunk",
 			["default:pine_needles"] = "leaves",
@@ -150,7 +150,7 @@ if has_mod("default") then
 	})
 
 	api.register_tree("default:tree", {
-		shape = { type = "prism", prism = vector.new(7, 7, 7) },
+		shape = { type = "box", box = vector.new(7, 7, 7) },
 		nodes = {
 			["default:tree"] = "trunk",
 			["default:leaves"] = "leaves",
@@ -161,7 +161,7 @@ end
 
 if has_mod("ebony") then
 	api.register_tree("cooltrees:ebony", {
-		shape = { type = "prism", prism = vector.new(11, 16, 11) },
+		shape = { type = "box", box = vector.new(11, 16, 11) },
 		nodes = {
 			["ebony:trunk"] = "trunk",
 			["ebony:leaves"] = "leaves",
@@ -175,7 +175,7 @@ end
 
 if has_mod("ethereal") then
 	api.register_tree("ethereal:bamboo", {
-		shape = { type = "prism", prism = vector.new(3, 16, 3) },
+		shape = { type = "box", box = vector.new(3, 16, 3) },
 		nodes = {
 			["ethereal:bamboo"] = "trunk",
 			["ethereal:bamboo_leaves"] = "leaves",
@@ -183,7 +183,7 @@ if has_mod("ethereal") then
 	})
 
 	api.register_tree("ethereal:banana", {
-		shape = { type = "prism", prism = vector.new(3, 16, 3) },
+		shape = { type = "box", box = vector.new(3, 16, 3) },
 		nodes = {
 			["ethereal:banana_trunk"] = "trunk",
 			["ethereal:bananaleaves"] = "leaves",
@@ -192,7 +192,7 @@ if has_mod("ethereal") then
 	})
 
 	api.register_tree("ethereal:birch", {
-		shape = { type = "prism", prism = vector.new(5, 5, 5) },
+		shape = { type = "box", box = vector.new(5, 5, 5) },
 		nodes = {
 			["ethereal:birch_trunk"] = "trunk",
 			["ethereal:birch_leaves"] = "leaves",
@@ -200,7 +200,7 @@ if has_mod("ethereal") then
 	})
 
 	api.register_tree("ethereal:frost", {
-		shape = { type = "prism", prism = vector.new(8, 15, 8) },
+		shape = { type = "box", box = vector.new(8, 15, 8) },
 		nodes = {
 			["ethereal:frost_tree"] = "trunk",
 			["ethereal:frost_leaves"] = "leaves",
@@ -208,7 +208,7 @@ if has_mod("ethereal") then
 	})
 
 	api.register_tree("ethereal:frost", {
-		shape = { type = "prism", prism = vector.new(8, 15, 8) },
+		shape = { type = "box", box = vector.new(8, 15, 8) },
 		nodes = {
 			["ethereal:frost_tree"] = "trunk",
 			["ethereal:frost_leaves"] = "leaves",
@@ -216,7 +216,7 @@ if has_mod("ethereal") then
 	})
 
 	api.register_tree("ethereal:redwood", {
-		shape = { type = "prism", prism = vector.new(15, 30, 15) },
+		shape = { type = "box", box = vector.new(15, 30, 15) },
 		nodes = {
 			["ethereal:redwood_trunk"] = "trunk",
 			["ethereal:redwood_leaves"] = "leaves",
@@ -229,7 +229,7 @@ if has_mod("ethereal") then
 	})
 
 	api.register_tree("ethereal:mushroom", {
-		shape = { type = "prism", prism = vector.new(8, 11, 8) },
+		shape = { type = "box", box = vector.new(8, 11, 8) },
 		nodes = {
 			["ethereal:mushroom_trunk"] = "trunk",
 			["ethereal:mushroom"] = "trunk",
@@ -238,7 +238,7 @@ if has_mod("ethereal") then
 	})
 
 	api.register_tree("ethereal:olive", {
-		shape = { type = "prism", prism = vector.new(8, 9, 8) },
+		shape = { type = "box", box = vector.new(8, 9, 8) },
 		nodes = {
 			["ethereal:olive_trunk"] = "trunk",
 			["ethereal:olive_leaves"] = "leaves",
@@ -252,7 +252,7 @@ if has_mod("ethereal") then
 	})
 
 	api.register_tree("ethereal:palm", {
-		shape = { type = "prism", prism = vector.new(7, 8, 7) },
+		shape = { type = "box", box = vector.new(7, 8, 7) },
 		nodes = {
 			["ethereal:palm_trunk"] = "trunk",
 			["ethereal:palmleaves"] = "leaves",
@@ -261,7 +261,7 @@ if has_mod("ethereal") then
 	})
 
 	api.register_tree("ethereal:sakura", {
-		shape = { type = "prism", prism = vector.new(10, 9, 10) },
+		shape = { type = "box", box = vector.new(10, 9, 10) },
 		nodes = {
 			["ethereal:sakura_trunk"] = "trunk",
 			["ethereal:sakura_leaves"] = "leaves",
@@ -270,7 +270,7 @@ if has_mod("ethereal") then
 	})
 
 	api.register_tree("ethereal:willow", {
-		shape = { type = "prism", prism = vector.new(12, 13, 12) },
+		shape = { type = "box", box = vector.new(12, 13, 12) },
 		nodes = {
 			["ethereal:willow_trunk"] = "trunk",
 			["ethereal:willow_twig"] = "leaves",
@@ -278,7 +278,7 @@ if has_mod("ethereal") then
 	})
 
 	api.register_tree("ethereal:yellow", {
-		shape = { type = "prism", prism = vector.new(9, 19, 9) },
+		shape = { type = "box", box = vector.new(9, 19, 9) },
 		nodes = {
 			["ethereal:yellow_trunk"] = "trunk",
 			["ethereal:yellowleaves"] = "leaves",
@@ -289,7 +289,7 @@ end
 
 if has_mod("ferns") then
 	api.register_tree("ferns:giant_tree_fern", {
-		shape = { type = "prism", prism = vector.new(9, 16, 9) },
+		shape = { type = "box", box = vector.new(9, 16, 9) },
 		nodes = {
 			["ferns:fern_trunk_big"] = "trunk",
 			["ferns:fern_trunk_big_top"] = "trunk",
@@ -300,7 +300,7 @@ if has_mod("ferns") then
 	})
 
 	api.register_tree("ferns:tree_fern", {
-		shape = { type = "prism", prism = vector.new(1, 10, 1) },
+		shape = { type = "box", box = vector.new(1, 10, 1) },
 		nodes = {
 			["ferns:fern_trunk "] = "trunk",
 			["ferns:tree_fern_leaves"] = "leaves",
@@ -311,7 +311,7 @@ end
 
 if has_mod("hollytree") then
 	api.register_tree("hollytree:hollytree", {
-		shape = { type = "prism", prism = vector.new(10, 12, 10) },
+		shape = { type = "box", box = vector.new(10, 12, 10) },
 		nodes = {
 			["hollytree:trunk"] = "trunk",
 			["hollytree:leaves"] = "leaves",
@@ -321,7 +321,7 @@ end
 
 if has_mod("jacaranda") then
 	api.register_tree("jacaranda:jacaranda", {
-		shape = { type = "prism", prism = vector.new(7, 8, 7) },
+		shape = { type = "box", box = vector.new(7, 8, 7) },
 		nodes = {
 			["jacaranda:trunk"] = "trunk",
 			["jacaranda:blossom_leaves"] = "leaves",
@@ -331,7 +331,7 @@ end
 
 if has_mod("larch") then
 	api.register_tree("larch:larch", {
-		shape = { type = "prism", prism = vector.new(11, 17, 11) },
+		shape = { type = "box", box = vector.new(11, 17, 11) },
 		nodes = {
 			["larch:trunk"] = "trunk",
 			["larch:leaves"] = "leaves",
@@ -342,7 +342,7 @@ end
 
 if has_mod("lemontree") then
 	api.register_tree("lemontree:lemontree", {
-		shape = { type = "prism", prism = vector.new(5, 7, 5) },
+		shape = { type = "box", box = vector.new(5, 7, 5) },
 		nodes = {
 			["lemontree:trunk"] = "trunk",
 			["lemontree:leaves"] = "leaves",
@@ -353,7 +353,7 @@ end
 
 if has_mod("mahogany") then
 	api.register_tree("mahogany:mahogany", {
-		shape = { type = "prism", prism = vector.new(5, 7, 5) },
+		shape = { type = "box", box = vector.new(5, 7, 5) },
 		nodes = {
 			["mahogany:trunk"] = "trunk",
 			["mahogany:leaves"] = "leaves",
@@ -366,7 +366,7 @@ end
 
 if has_mod("mahogany") then
 	api.register_tree("mahogany:mahogany", {
-		shape = { type = "prism", prism = vector.new(7, 17, 7) },
+		shape = { type = "box", box = vector.new(7, 17, 7) },
 		nodes = {
 			["mahogany:trunk"] = "trunk",
 			["mahogany:leaves"] = "leaves",
@@ -379,7 +379,7 @@ end
 
 if has_mod("maple") then
 	api.register_tree("maple:maple", {
-		shape = { type = "prism", prism = vector.new(10, 10, 10) },
+		shape = { type = "box", box = vector.new(10, 10, 10) },
 		nodes = {
 			["maple:trunk"] = "trunk",
 			["maple:leaves"] = "leaves",
@@ -389,7 +389,7 @@ end
 
 if has_mod("moretrees") then
 	api.register_tree("moretrees:apple", {
-		shape = { type = "prism", prism = vector.new(18, 9, 18) },
+		shape = { type = "box", box = vector.new(18, 9, 18) },
 		nodes = {
 			["moretrees:apple_tree_trunk"] = "trunk",
 			["moretrees:apple_tree_leaves"] = "leaves",
@@ -399,7 +399,7 @@ if has_mod("moretrees") then
 	})
 
 	api.register_tree("moretrees:beech", {
-		shape = { type = "prism", prism = vector.new(9, 8, 9) },
+		shape = { type = "box", box = vector.new(9, 8, 9) },
 		nodes = {
 			["moretrees:beech_trunk"] = "trunk",
 			["moretrees:beech_leaves"] = "leaves",
@@ -407,7 +407,7 @@ if has_mod("moretrees") then
 	})
 
 	api.register_tree("moretrees:birch", {
-		shape = { type = "prism", prism = vector.new(14, 24, 14) },
+		shape = { type = "box", box = vector.new(14, 24, 14) },
 		nodes = {
 			["moretrees:birch_trunk"] = "trunk",
 			["moretrees:birch_leaves"] = "leaves",
@@ -415,7 +415,7 @@ if has_mod("moretrees") then
 	})
 
 	api.register_tree("moretrees:cedar", {
-		shape = { type = "prism", prism = vector.new(15, 26, 15) },
+		shape = { type = "box", box = vector.new(15, 26, 15) },
 		nodes = {
 			["moretrees:cedar_trunk"] = "trunk",
 			["moretrees:cedar_leaves"] = "leaves",
@@ -424,7 +424,7 @@ if has_mod("moretrees") then
 	})
 
 	api.register_tree("moretrees:date_palm", {
-		shape = { type = "prism", prism = vector.new(23, 30, 23) },
+		shape = { type = "box", box = vector.new(23, 30, 23) },
 		nodes = {
 			["moretrees:date_palm_trunk"] = "trunk",
 			["moretrees:date_palm_ffruit_trunk"] = "trunk",
@@ -443,7 +443,7 @@ if has_mod("moretrees") then
 	})
 
 	api.register_tree("moretrees:douglas_fir", {
-		shape = { type = "prism", prism = vector.new(7, 22, 7) },
+		shape = { type = "box", box = vector.new(7, 22, 7) },
 		nodes = {
 			["moretrees:fir_trunk"] = "trunk",
 			["moretrees:fir_leaves"] = "leaves",
@@ -453,7 +453,7 @@ if has_mod("moretrees") then
 	})
 
 	api.register_tree("moretrees:jungletree", {
-		shape = { type = "prism", prism = vector.new(15, 35, 15) },
+		shape = { type = "box", box = vector.new(15, 35, 15) },
 		nodes = {
 			["moretrees:jungletree_trunk"] = "trunk",
 			["default:jungleleaves"] = "leaves",
@@ -463,7 +463,7 @@ if has_mod("moretrees") then
 	})
 
 	api.register_tree("moretrees:oak", {
-		shape = { type = "prism", prism = vector.new(15, 15, 15) },
+		shape = { type = "box", box = vector.new(15, 15, 15) },
 		nodes = {
 			["moretrees:oak_trunk"] = "trunk",
 			["moretrees:oak_leaves"] = "leaves",
@@ -472,7 +472,7 @@ if has_mod("moretrees") then
 	})
 
 	api.register_tree("moretrees:palm", {
-		shape = { type = "prism", prism = vector.new(18, 15, 18) },
+		shape = { type = "box", box = vector.new(18, 15, 18) },
 		nodes = {
 			["moretrees:palm_trunk"] = "trunk",
 			["moretrees:palm_fruit_trunk"] = "trunk",
@@ -487,7 +487,7 @@ if has_mod("moretrees") then
 	})
 
 	api.register_tree("moretrees:poplar", {
-		shape = { type = "prism", prism = vector.new(5, 26, 5) },
+		shape = { type = "box", box = vector.new(5, 26, 5) },
 		nodes = {
 			["moretrees:poplar_trunk"] = "trunk",
 			["moretrees:poplar_leaves"] = "leaves",
@@ -495,7 +495,7 @@ if has_mod("moretrees") then
 	})
 
 	api.register_tree("moretrees:rubber", {
-		shape = { type = "prism", prism = vector.new(17, 13, 17) },
+		shape = { type = "box", box = vector.new(17, 13, 17) },
 		nodes = {
 			["moretrees:rubber_tree_trunk"] = "trunk",
 			["moretrees:rubber_tree_trunk_empty"] = "trunk",
@@ -504,7 +504,7 @@ if has_mod("moretrees") then
 	})
 
 	api.register_tree("moretrees:sequoia", {
-		shape = { type = "prism", prism = vector.new(18, 42, 18) },
+		shape = { type = "box", box = vector.new(18, 42, 18) },
 		nodes = {
 			["moretrees:sequoia_trunk"] = "trunk",
 			["moretrees:sequoia_leaves"] = "leaves",
@@ -512,7 +512,7 @@ if has_mod("moretrees") then
 	})
 
 	api.register_tree("moretrees:spruce", {
-		shape = { type = "prism", prism = vector.new(19, 34, 19) },
+		shape = { type = "box", box = vector.new(19, 34, 19) },
 		nodes = {
 			["moretrees:spruce_trunk"] = "trunk",
 			["moretrees:spruce_leaves"] = "leaves",
@@ -521,7 +521,7 @@ if has_mod("moretrees") then
 	})
 
 	api.register_tree("moretrees:willow", {
-		shape = { type = "prism", prism = vector.new(22, 14, 22) },
+		shape = { type = "box", box = vector.new(22, 14, 22) },
 		nodes = {
 			["moretrees:willow_trunk"] = "trunk",
 			["moretrees:willow_leaves"] = "leaves",
@@ -531,7 +531,7 @@ end
 
 if has_mod("oak") then
 	api.register_tree("oak:oak", {
-		shape = { type = "prism", prism = vector.new(11, 17, 11) },
+		shape = { type = "box", box = vector.new(11, 17, 11) },
 		nodes = {
 			["oak:trunk"] = "trunk",
 			["oak:leaves"] = "leaves",
@@ -542,7 +542,7 @@ end
 
 if has_mod("palm") then
 	api.register_tree("palm:palm", {
-		shape = { type = "prism", prism = vector.new(7, 6, 7) },
+		shape = { type = "box", box = vector.new(7, 6, 7) },
 		nodes = {
 			["palm:trunk"] = "trunk",
 			["palm:leaves"] = "leaves",
@@ -553,7 +553,7 @@ end
 
 if has_mod("plumtree") then
 	api.register_tree("plumtree:plumtree", {
-		shape = { type = "prism", prism = vector.new(9, 11, 9) },
+		shape = { type = "box", box = vector.new(9, 11, 9) },
 		nodes = {
 			["plumtree:trunk"] = "trunk",
 			["plumtree:leaves"] = "leaves",
@@ -564,7 +564,7 @@ end
 
 if has_mod("pomegranate") then
 	api.register_tree("pomegranate:pomegranate", {
-		shape = { type = "prism", prism = vector.new(3, 5, 3) },
+		shape = { type = "box", box = vector.new(3, 5, 3) },
 		nodes = {
 			["pomegranate:trunk"] = "trunk",
 			["pomegranate:leaves"] = "leaves",
@@ -575,7 +575,7 @@ end
 
 if has_mod("sequoia") then
 	api.register_tree("sequoia:sequoia", {
-		shape = { type = "prism", prism = vector.new(17, 48, 17) },
+		shape = { type = "box", box = vector.new(17, 48, 17) },
 		nodes = {
 			["sequoia:trunk"] = "trunk",
 			["sequoia:leaves"] = "leaves",
@@ -585,7 +585,7 @@ end
 
 if has_mod("willow") then
 	api.register_tree("willow:willow", {
-		shape = { type = "prism", prism = vector.new(10, 12, 10) },
+		shape = { type = "box", box = vector.new(10, 12, 10) },
 		nodes = {
 			["willow:trunk"] = "trunk",
 			["willow:leaves"] = "leaves",
@@ -595,7 +595,7 @@ end
 
 if has_mod("x_farming") then
 	api.register_tree("x_farming:kiwi", {
-		shape = { type = "prism", prism = vector.new(5, 4, 5) },
+		shape = { type = "box", box = vector.new(5, 4, 5) },
 		nodes = {
 			["x_farming:kiwi_tree"] = "trunk",
 			["x_farming:kiwi_leaves"] = "leaves",
@@ -604,7 +604,7 @@ if has_mod("x_farming") then
 	})
 
 	api.register_tree("x_farming:cocoa", {
-		shape = { type = "prism", prism = vector.new(5, 18, 5) },
+		shape = { type = "box", box = vector.new(5, 18, 5) },
 		nodes = {
 			["x_farming:jungle_tree"] = "trunk",
 			["x_farming:jungle_leaves"] = "leaves",
@@ -615,7 +615,7 @@ if has_mod("x_farming") then
 	})
 
 	api.register_tree("x_farming:", {
-		shape = { type = "prism", prism = vector.new(5, 7, 5) },
+		shape = { type = "box", box = vector.new(5, 7, 5) },
 		nodes = {
 			["x_farming:pine_nut_tree"] = "trunk",
 			["x_farming:pine_nut_leaves"] = "leaves",

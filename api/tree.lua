@@ -30,19 +30,19 @@ function api.player_in_bounds(player_pos, start_pos, shape)
 	return api.registered_tree_shapes[shape.type].player_in_bounds(player_pos, start_pos, shape)
 end
 
-api.register_tree_shape("prism", {
+api.register_tree_shape("box", {
 	in_bounds = function(pos, start_pos, shape)
-		local prism = shape.prism
-		return abs(pos.x - start_pos.x) <= (prism.x - 1 + halo_size)
-			and abs(pos.y - start_pos.y) <= (prism.y - 1 + halo_size)
-			and abs(pos.z - start_pos.z) <= (prism.z - 1 + halo_size)
+		local box = shape.box
+		return abs(pos.x - start_pos.x) <= (box.x - 1 + halo_size)
+			and abs(pos.y - start_pos.y) <= (box.y - 1 + halo_size)
+			and abs(pos.z - start_pos.z) <= (box.z - 1 + halo_size)
 	end,
 
 	player_in_bounds = function(player_pos, start_pos, shape)
-		local prism = shape.prism
-		return abs(player_pos.x - start_pos.x) <= (prism.x * player_scale)
-			and abs(player_pos.y - start_pos.y) <= (prism.y * player_scale)
-			and abs(player_pos.z - start_pos.z) <= (prism.z * player_scale)
+		local box = shape.box
+		return abs(player_pos.x - start_pos.x) <= (box.x * player_scale)
+			and abs(player_pos.y - start_pos.y) <= (box.y * player_scale)
+			and abs(player_pos.z - start_pos.z) <= (box.z * player_scale)
 	end,
 })
 
