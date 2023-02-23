@@ -18,7 +18,12 @@ function api.update_hud(player_name)
 	end
 
 	local tree_name = process.tree_name
-	local text = S("chopping @1\npress SNEAK to stop", tree_name)
+	local text
+	if api.get_toggled(player_name) then
+		text = S("chopping @1\nrelease SNEAK to stop", tree_name)
+	else
+		text = S("chopping @1\npress SNEAK to stop", tree_name)
+	end
 
 	local text_hud_id, image_hud_id = unpack(hud_ids_by_player_name[player_name] or {})
 	if text_hud_id then

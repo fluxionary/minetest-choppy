@@ -13,7 +13,7 @@ local function toggled_key(player_name)
 	return f("toggled:%s", player_name)
 end
 
-local function get_toggled(player_name)
+function api.get_toggled(player_name)
 	local toggled = cache[player_name]
 	if toggled == nil then
 		toggled = is_yes(mod_storage:get(toggled_key(player_name)))
@@ -22,17 +22,9 @@ local function get_toggled(player_name)
 	return toggled
 end
 
-function api.is_enabled(player)
-	local player_name = player:get_player_name()
-	local control = player:get_player_control()
-	local toggled = get_toggled(player_name)
-
-	return (toggled and control.sneak) or (not toggled and not control.sneak)
-end
-
 function api.toggle_enabled(player_name)
 	local key = toggled_key(player_name)
-	local toggled = not get_toggled(player_name)
+	local toggled = not api.get_toggled(player_name)
 	if toggled then
 		mod_storage:set_string(key, "y")
 	else
@@ -40,4 +32,12 @@ function api.toggle_enabled(player_name)
 	end
 	cache[player_name] = toggled
 	return toggled
+end
+
+function api.is_enabled(player)
+	local player_name = player:get_player_name()
+	local control = player:get_player_control()
+	local toggled = api.get_toggled(player_name)
+
+	return (toggled and control.sneak) or (not toggled and not control.sneak)
 end
