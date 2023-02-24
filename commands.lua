@@ -5,9 +5,9 @@ minetest.register_chatcommand("toggle_choppy", {
 	description = S("toggles whether choppy is enabled while sneaking or disabled while sneaking"),
 	func = function(name)
 		if api.toggle_enabled(name) then
-			return true, S("hold sneak to enable choppy")
+			return true, S("press & hold sneak to enable choppy")
 		else
-			return false, S("hold sneak to disable choppy")
+			return false, S("press & hold sneak to disable choppy")
 		end
 	end,
 })
