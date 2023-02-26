@@ -42,6 +42,7 @@ api.Process = Process
 
 function Process:_init(start_pos, player_name, tree_name)
 	self.start_pos = start_pos
+	self.current_pos = start_pos
 	self.player_name = player_name
 	self.tree_name = tree_name
 	self.tree_shape = api.registered_trees[tree_name].shape
@@ -138,6 +139,25 @@ function Process:ensure_positions()
 	end
 end
 
+local sound_cache = {}
+
+local function play_sound(pos, node_name)
+	local spec = sound_cache[node_name]
+	if not spec then
+		local def = minetest.registered_nodes[node_name]
+		if not (def and def.sounds and def.sounds.dug) then
+			return
+		end
+		spec = def.sounds.dug
+		sound_cache[node_name] = spec
+	end
+
+	minetest.sound_play(spec, {
+		pos = pos,
+		max_hear_distance = 32,
+	}, true)
+end
+
 function Process:on_globalstep(dtime, player)
 	local elapsed = self.elapsed + dtime
 	local wielded = player:get_wielded_item()
@@ -152,6 +172,7 @@ function Process:on_globalstep(dtime, player)
 	local node_dig = minetest.node_dig
 
 	while pos do
+		self.current_pos = pos
 		local node = get_node(pos)
 		local dig_time, wear = get_dig_time_and_wear(node.name, wielded, hand)
 
@@ -176,6 +197,7 @@ function Process:on_globalstep(dtime, player)
 
 			if not cancel_dig then
 				node_dig(pos, node, player)
+				play_sound(pos, node.name)
 				wielded = player:get_wielded_item()
 				elapsed = elapsed - dig_time
 			end
