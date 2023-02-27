@@ -2,13 +2,23 @@
 choppy.halo_size (halo size) int 1 0 65535
 
 # distance a player can be from a tree, proportional to the size of the tree
-choppy.player_scale (player scale) float 1.1 0.01
-
-# if true, leaves will be removed w/ the equivalent of a diamond sword. if false, the properties of the player's hand are used, if the axe cannot break leaves.
-choppy.fast_leaves (fast leaf removal) bool true
+choppy.player_scale (player scale) float 1.1 0.5
 
 # radius to search for more tree nodes
 choppy.step_radius (search radius) int 2 1
 
 # 2 means "twice as fast"; 0.5 means "half as fast".
 choppy.dig_speed_multiplier (dig speed multiplier) float 1 0.0000000001 inf
+
+# if set to intrinsic, will dig leaves w/ the axe's builtin abilities, and fall back on the player's hand.
+# if set to snappy_multiplier, will convert the axe's choppy cap to snappy cap if it can't break the leaves.
+choppy.leaves_mode (leaf removal mode) enum snappy_multiplier intrinsic,snappy_multiplier
+
+# multiplier when leaves mode is set to snappy_multiplier
+choppy.snappy_multiplier (snappy multiplier) float 5
+
+# name of the choppy (wood cutting) toolcap for snappy_multiplier leaves mode
+choppy.choppy_cap_name () string choppy
+
+# name of the snappy (leaf cutting) toolcap for snappy_multiplier leaves mode
+choppy.snappy_cap_name () string snappy

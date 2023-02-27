@@ -1,21 +1,8 @@
 local get_node = minetest.get_node
 local hash_node_position = minetest.hash_node_position
 
-local fast_leaves = choppy.settings.fast_leaves
-
 local get_dig_time_and_wear = choppy.util.get_dig_time_and_wear
 local get_neighbors = choppy.util.get_neighbors
-
-local fast_hand = ItemStack("")
-fast_hand:get_meta():set_tool_capabilities({
-	max_drop_level = 1,
-	groupcaps = {
-		snappy = {
-			times = { 1.9, 0.9, 0.3 },
-			maxlevel = 3,
-		},
-	},
-})
 
 local api = choppy.api
 
@@ -161,12 +148,7 @@ end
 function Process:on_globalstep(dtime, player)
 	local elapsed = self.elapsed + dtime
 	local wielded = player:get_wielded_item()
-	local hand
-	if fast_leaves then
-		hand = fast_hand
-	else
-		hand = player:get_inventory():get_stack("hand", 1)
-	end
+	local hand = player:get_inventory():get_stack("hand", 1)
 	local positions = self.positions
 	local pos = self:get_next_valid_target()
 	local node_dig = minetest.node_dig
@@ -175,6 +157,7 @@ function Process:on_globalstep(dtime, player)
 		self.current_pos = pos
 		local node = get_node(pos)
 		local dig_time, wear = get_dig_time_and_wear(node.name, wielded, hand)
+		choppy.log("action", "[debug] %s %s", dig_time, wear)
 
 		if dig_time then
 			if dig_time > elapsed then

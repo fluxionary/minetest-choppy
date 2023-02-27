@@ -1,7 +1,11 @@
 local get_dig_params = minetest.get_dig_params
 
-local multiplier = choppy.settings.dig_speed_multiplier
+local dig_speed_multiplier = choppy.settings.dig_speed_multiplier
 local step_radius = choppy.settings.step_radius
+local leaves_mode = choppy.settings.leaves_mode
+local snappy_multiplier = choppy.settings.snappy_multiplier
+local choppy_cap_name = choppy.settings.choppy_cap_name
+local snappy_cap_name = choppy.settings.snappy_cap_name
 
 local util = {}
 
@@ -48,21 +52,62 @@ function util.get_neighbors_above(pos)
 	end
 end
 
+local function try_snappy_multiplier(toolcaps)
+	return (
+		leaves_mode == "snappy_multiplier"
+		and toolcaps
+		and toolcaps.groupcaps
+		and toolcaps.groupcaps[choppy_cap_name]
+		and not toolcaps.groupcaps[snappy_cap_name]
+	)
+end
+
+local function get_snappy_caps(toolcaps)
+	local choppy_caps = toolcaps.groupcaps[choppy_cap_name]
+	local snappy_caps = {
+		times = {},
+		uses = choppy_caps.uses * snappy_multiplier,
+		maxlevel = choppy_caps.maxlevel,
+	}
+	for k, time in pairs(choppy_caps.times) do
+		snappy_caps.times[k] = time / snappy_multiplier
+	end
+	return {
+		groupcaps = {
+			[snappy_cap_name] = snappy_caps,
+		},
+	}
+end
+
 function util.get_dig_time_and_wear(node_name, wielded, hand)
 	local node_def = minetest.registered_nodes[node_name]
 	if not node_def then
 		return
 	end
 
-	local dig_params = get_dig_params(node_def.groups or {}, wielded:get_tool_capabilities(), wielded:get_wear())
-	if dig_params.diggable then
-		return dig_params.time / multiplier, dig_params.wear
-	else
-		dig_params = get_dig_params(node_def.groups or {}, hand:get_tool_capabilities(), hand:get_wear())
+	local node_groups = node_def.groups or {}
+	local wielded_caps = wielded:get_tool_capabilities()
+	local wielded_wear = wielded:get_wear()
 
+	local dig_params = get_dig_params(node_groups, wielded_caps, wielded_wear)
+	if dig_params.diggable then
+		choppy.log("action", "[debug] axe can cut")
+		return dig_params.time / dig_speed_multiplier, dig_params.wear
+	elseif try_snappy_multiplier(wielded_caps) then
+		local snappy_caps = get_snappy_caps(wielded_caps)
+		dig_params = get_dig_params(node_groups, snappy_caps, wielded_wear)
 		if dig_params.diggable then
-			return dig_params.time / multiplier, 0
+			choppy.log("action", "[debug] snappy multiplier")
+			return dig_params.time / dig_speed_multiplier, dig_params.wear
 		end
+	end
+
+	choppy.log("action", "[debug] falling back to hand")
+	-- if all else fails, use the hand
+	dig_params = get_dig_params(node_def.groups or {}, hand:get_tool_capabilities(), hand:get_wear())
+
+	if dig_params.diggable then
+		return dig_params.time / dig_speed_multiplier, 0
 	end
 end
 
