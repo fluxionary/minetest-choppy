@@ -614,7 +614,7 @@ if has_mod("x_farming") then
 		},
 	})
 
-	api.register_tree("x_farming:", {
+	api.register_tree("x_farming:pine_nut", {
 		shape = { type = "box", box = vector.new(5, 7, 5) },
 		nodes = {
 			["x_farming:pine_nut_tree"] = "trunk",

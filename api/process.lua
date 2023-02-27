@@ -38,6 +38,7 @@ function Process:_init(start_pos, player_name, tree_name)
 	self.fringe:push_back(start_pos)
 	self.seen = {}
 	self.elapsed = 0
+	self.nodes_chopped = 0
 end
 
 function Process:targets_remaining()
@@ -118,7 +119,6 @@ function Process:step_fringe()
 end
 
 function Process:ensure_positions()
-	self:step_fringe() -- expand the fringe slowly
 	local positions = self.positions
 	local fringe = self.fringe
 	while positions:size() == 0 and fringe:size() > 0 do
@@ -180,6 +180,7 @@ function Process:on_globalstep(dtime, player)
 
 			if not cancel_dig then
 				node_dig(pos, node, player)
+				self.nodes_chopped = self.nodes_chopped + 1
 				play_sound(pos, node.name)
 				wielded = player:get_wielded_item()
 				elapsed = elapsed - dig_time

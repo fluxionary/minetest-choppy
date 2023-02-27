@@ -22,9 +22,19 @@ function api.update_hud(player_name)
 	local tree_name = process.tree_name
 	local text
 	if api.get_toggled(player_name) then
-		text = S("chopping @1\nrelease SNEAK to stop", tree_name)
+		text = S(
+			"chopping @1\n@2 chopped, at least @3 remaining\nrelease SNEAK to stop",
+			tree_name,
+			process.nodes_chopped,
+			process:targets_remaining()
+		)
 	else
-		text = S("chopping @1\npress SNEAK to stop", tree_name)
+		text = S(
+			"chopping @1\n@2 chopped, at least @3 remaining\npress SNEAK to stop",
+			tree_name,
+			process.nodes_chopped,
+			process:targets_remaining()
+		)
 	end
 
 	local hud_ids = hud_ids_by_player_name[player_name] or {}
@@ -48,7 +58,7 @@ function api.update_hud(player_name)
 		text_hud_id = player:hud_add({
 			name = "choppy:text",
 			hud_elem_type = "text",
-			position = { x = 0.5, y = 0.3 },
+			position = { x = 0.5, y = 0.2 },
 			alignment = { x = 0, y = 0 },
 			offset = { x = 0, y = 0 },
 			number = 0xFFFFFF,
@@ -71,7 +81,7 @@ function api.update_hud(player_name)
 			image_hud_id = player:hud_add({
 				name = "choppy:image",
 				hud_elem_type = "image",
-				position = { x = 0.5, y = 0.2 },
+				position = { x = 0.5, y = 0.1 },
 				scale = { x = 5, y = 5 },
 				alignment = { x = 0, y = 0 },
 				offset = { x = 0, y = 0 },
