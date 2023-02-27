@@ -11,3 +11,14 @@ minetest.register_chatcommand("toggle_choppy", {
 		end
 	end,
 })
+
+minetest.register_chatcommand("visualize_choppy", {
+	description = S("toggles whether choppy shows waypoints where cutting is occurring"),
+	func = function(name)
+		if api.toggle_visualize_enabled(name) then
+			return true, S("visualization enabled")
+		else
+			return false, S("visualization disabled")
+		end
+	end,
+})

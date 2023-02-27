@@ -157,7 +157,6 @@ function Process:on_globalstep(dtime, player)
 		self.current_pos = pos
 		local node = get_node(pos)
 		local dig_time, wear = get_dig_time_and_wear(node.name, wielded, hand)
-		choppy.log("action", "[debug] %s %s", dig_time, wear)
 
 		if dig_time then
 			if dig_time > elapsed then
