@@ -8,7 +8,7 @@ choppy.player_scale (player scale) float 1.1 0.5
 choppy.step_radius (search radius) int 2 1
 
 # 2 means "twice as fast"; 0.5 means "half as fast".
-choppy.dig_speed_multiplier (dig speed multiplier) float 1 0.0000000001 inf
+choppy.dig_speed_multiplier (dig speed multiplier) float 1 0.001 1000
 
 # if set to intrinsic, will dig leaves w/ the axe's builtin abilities, and fall back on the player's hand.
 # if set to snappy_multiplier, will convert the axe's choppy cap to snappy cap if it can't break the leaves.
