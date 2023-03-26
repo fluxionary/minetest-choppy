@@ -222,7 +222,6 @@ end
 
 function api.stop_process(player_name)
 	api.process_by_player[player_name] = nil
-	api.remove_hud(player_name)
 
 	for _, callback in ipairs(api.registered_on_choppy_stops) do
 		callback(player_name)
@@ -237,8 +236,6 @@ function api.process_globalstep(dtime)
 
 			if process:is_complete() then
 				api.stop_process(player_name)
-			else
-				api.update_hud(player_name)
 			end
 		else
 			api.stop_process(player_name)
