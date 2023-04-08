@@ -149,8 +149,7 @@ end
 
 local staminoid_disabled_by_player_name = {}
 local function should_disable_staminoid(node_name)
-	local _, node_kind = api.get_tree_and_kind(node_name)
-	return node_kind ~= "trunk"
+	return minetest.get_item_group(node_name, "choppy") == 0
 end
 
 if has_staminoid then
