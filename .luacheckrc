@@ -652,5 +652,6 @@ stds.choppy = {
 	read_globals = {
 		"fmod",
 		"futil",
+		"staminoid",
 	},
 }

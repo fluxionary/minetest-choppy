@@ -6,6 +6,8 @@ local get_neighbors = choppy.util.get_neighbors
 
 local api = choppy.api
 
+local has_staminoid = choppy.has.staminoid
+
 api.process_by_player = {}
 
 api.registered_on_choppy_starts = {}
@@ -145,8 +147,24 @@ local function play_sound(pos, node_name)
 	}, true)
 end
 
+local staminoid_disabled_by_player_name = {}
+local function should_disable_staminoid(node_name)
+	local _, node_kind = api.get_tree_and_kind(node_name)
+	return node_kind ~= "trunk"
+end
+
+if has_staminoid then
+	staminoid.register_on_exhaust_player(function(player, amount, reason)
+		local player_name = player:get_player_name()
+		if staminoid_disabled_by_player_name[player_name] and reason == "dig" then
+			return 0
+		end
+	end)
+end
+
 function Process:on_globalstep(dtime, player)
 	local elapsed = self.elapsed + dtime
+	local player_name = player:get_player_name()
 	local wielded = player:get_wielded_item()
 	local hand = player:get_inventory():get_stack("hand", 1)
 	local positions = self.positions
@@ -178,7 +196,14 @@ function Process:on_globalstep(dtime, player)
 			end
 
 			if not cancel_dig then
-				node_dig(pos, node, player)
+				if has_staminoid and should_disable_staminoid(node.name) then
+					-- if node is not a trunk, temporarily disable staminoid
+					staminoid_disabled_by_player_name[player_name] = true
+					node_dig(pos, node, player)
+					staminoid_disabled_by_player_name[player_name] = nil
+				else
+					node_dig(pos, node, player)
+				end
 				self.nodes_chopped = self.nodes_chopped + 1
 				play_sound(pos, node.name)
 				wielded = player:get_wielded_item()
