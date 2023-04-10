@@ -162,7 +162,7 @@ if has_staminoid then
 end
 
 function Process:on_globalstep(dtime, player)
-	local elapsed = self.elapsed + dtime
+	local elapsed
 	local player_name = player:get_player_name()
 	local wielded = player:get_wielded_item()
 	local hand = player:get_inventory():get_stack("hand", 1)
@@ -176,16 +176,6 @@ function Process:on_globalstep(dtime, player)
 		local dig_time, wear = get_dig_time_and_wear(node.name, wielded, hand)
 
 		if dig_time then
-			if dig_time > elapsed then
-				positions:push_front(pos) -- put it back at the front of the queue
-				break
-			end
-
-			if wielded:get_wear() + wear >= 65536 then
-				api.stop_process(self.player_name)
-				return
-			end
-
 			local cancel_dig = false
 			for _, callback in ipairs(api.registered_on_before_chops) do
 				if callback(self, player, pos, node) then
@@ -196,6 +186,20 @@ function Process:on_globalstep(dtime, player)
 
 			if cancel_dig then
 				break
+			end
+
+			if not elapsed then
+				elapsed = (self.elapsed or 0) + dtime
+			end
+
+			if dig_time > elapsed then
+				positions:push_front(pos) -- put it back at the front of the queue
+				break
+			end
+
+			if wielded:get_wear() + wear >= 65536 then
+				api.stop_process(self.player_name)
+				return
 			end
 
 			if has_staminoid and should_disable_staminoid(node.name) then
