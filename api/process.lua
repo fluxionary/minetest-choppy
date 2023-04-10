@@ -41,6 +41,11 @@ function Process:_init(start_pos, player_name, tree_name)
 	self.seen = {}
 	self.elapsed = 0
 	self.nodes_chopped = 0
+	self.paused = false
+end
+
+function Process:set_paused(boolean)
+	self.paused = boolean
 end
 
 function Process:targets_remaining()
@@ -162,6 +167,10 @@ if has_staminoid then
 end
 
 function Process:on_globalstep(dtime, player)
+	if self.paused then
+		return
+	end
+
 	local elapsed
 	local player_name = player:get_player_name()
 	local wielded = player:get_wielded_item()
@@ -173,26 +182,29 @@ function Process:on_globalstep(dtime, player)
 	while pos do
 		self.current_pos = pos
 		local node = get_node(pos)
+
+		local cancel_dig = false
+		for _, callback in ipairs(api.registered_on_before_chops) do
+			if callback(self, player, pos, node) then
+				cancel_dig = true
+				break
+			end
+		end
+
+		if cancel_dig then
+			break
+		end
+
 		local dig_time, wear = get_dig_time_and_wear(node.name, wielded, hand)
 
 		if dig_time then
-			local cancel_dig = false
-			for _, callback in ipairs(api.registered_on_before_chops) do
-				if callback(self, player, pos, node) then
-					cancel_dig = true
-					break
-				end
-			end
-
-			if cancel_dig then
-				break
-			end
-
 			if not elapsed then
+				-- this is initialized here so that we don't advance the timer if a dig event is cancelled
 				elapsed = (self.elapsed or 0) + dtime
 			end
 
 			if dig_time > elapsed then
+				-- not enough time has elapsed to dig another node
 				positions:push_front(pos) -- put it back at the front of the queue
 				break
 			end
@@ -214,6 +226,10 @@ function Process:on_globalstep(dtime, player)
 			play_sound(pos, node.name)
 			wielded = player:get_wielded_item()
 			elapsed = elapsed - dig_time
+
+			if self.paused then
+				break
+			end
 		end
 
 		pos = self:get_next_valid_target()
