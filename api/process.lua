@@ -194,20 +194,22 @@ function Process:on_globalstep(dtime, player)
 				end
 			end
 
-			if not cancel_dig then
-				if has_staminoid and should_disable_staminoid(node.name) then
-					-- if node is not a trunk, temporarily disable staminoid
-					staminoid_disabled_by_player_name[player_name] = true
-					node_dig(pos, node, player)
-					staminoid_disabled_by_player_name[player_name] = nil
-				else
-					node_dig(pos, node, player)
-				end
-				self.nodes_chopped = self.nodes_chopped + 1
-				play_sound(pos, node.name)
-				wielded = player:get_wielded_item()
-				elapsed = elapsed - dig_time
+			if cancel_dig then
+				break
 			end
+
+			if has_staminoid and should_disable_staminoid(node.name) then
+				-- if node is not a trunk, temporarily disable staminoid
+				staminoid_disabled_by_player_name[player_name] = true
+				node_dig(pos, node, player)
+				staminoid_disabled_by_player_name[player_name] = nil
+			else
+				node_dig(pos, node, player)
+			end
+			self.nodes_chopped = self.nodes_chopped + 1
+			play_sound(pos, node.name)
+			wielded = player:get_wielded_item()
+			elapsed = elapsed - dig_time
 		end
 
 		pos = self:get_next_valid_target()

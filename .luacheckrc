@@ -653,5 +653,6 @@ stds.choppy = {
 		"fmod",
 		"futil",
 		"staminoid",
+		"exhaustion_effect",
 	},
 }

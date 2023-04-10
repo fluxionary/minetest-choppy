@@ -8,3 +8,5 @@ choppy.dofile("callbacks")
 choppy.dofile("known_axes")
 choppy.dofile("known_trees")
 choppy.dofile("commands")
+
+choppy.dofile("compat", "init")
