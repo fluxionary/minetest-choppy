@@ -307,6 +307,11 @@ if has_mod("ferns") then
 			["ferns:tree_fern_leaves_02"] = "leaves",
 		},
 	})
+
+	-- these tree ferns have their own logic for falling down, but they don't deal w/ the leaves. disable it.
+	minetest.registered_nodes["ferns:fern_trunk_big"].after_destruct = nil
+	minetest.registered_nodes["ferns:tree_fern_leave_big"].after_destruct = nil
+	minetest.registered_nodes["ferns:fern_trunk"].after_destruct = nil
 end
 
 if has_mod("hollytree") then

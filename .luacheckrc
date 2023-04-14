@@ -648,6 +648,11 @@ stds.minetest = {
 stds.choppy = {
 	globals = {
 		"choppy",
+		minetest = {
+			fields = {
+				registered_nodes = {}
+			}
+		}
 	},
 	read_globals = {
 		"fmod",
