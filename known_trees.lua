@@ -7,8 +7,8 @@ if has_mod("baldcypress") then
 		nodes = {
 			["baldcypress:trunk"] = "trunk",
 			["baldcypress:leaves"] = "leaves",
-			["baldcypress:dry_branches"] = "other",
-			["baldcypress:liana"] = "other",
+			["baldcypress:dry_branches"] = "fruit",
+			["baldcypress:liana"] = "fruit",
 		},
 	})
 end
@@ -29,8 +29,8 @@ if has_mod("cacaotree") then
 		nodes = {
 			["cacaotree:trunk"] = "trunk",
 			["cacaotree:leaves"] = "leaves",
-			["cacaotree:flower_creeper"] = "other",
-			["cacaotree:liana"] = "other",
+			["cacaotree:flower_creeper"] = "fruit",
+			["cacaotree:liana"] = "fruit",
 			["cacaotree:pod"] = "fruit",
 		},
 	})
@@ -166,9 +166,9 @@ if has_mod("ebony") then
 			["ebony:trunk"] = "trunk",
 			["ebony:leaves"] = "leaves",
 			["ebony:persimmon"] = "fruit",
-			["ebony:creeper"] = "other",
-			["ebony:creeper_leaves"] = "other",
-			["ebony:liana"] = "other",
+			["ebony:creeper"] = "fruit",
+			["ebony:creeper_leaves"] = "fruit",
+			["ebony:liana"] = "fruit",
 		},
 	})
 end
@@ -340,7 +340,7 @@ if has_mod("larch") then
 		nodes = {
 			["larch:trunk"] = "trunk",
 			["larch:leaves"] = "leaves",
-			["larch:moss"] = "other",
+			["larch:moss"] = "fruit",
 		},
 	})
 end
@@ -375,9 +375,9 @@ if has_mod("mahogany") then
 		nodes = {
 			["mahogany:trunk"] = "trunk",
 			["mahogany:leaves"] = "leaves",
-			["mahogany:creeper"] = "other",
-			["mahogany:flower_creeper"] = "other",
-			["mahogany:hanging_creeper"] = "other",
+			["mahogany:creeper"] = "fruit",
+			["mahogany:flower_creeper"] = "fruit",
+			["mahogany:hanging_creeper"] = "fruit",
 		},
 	})
 end
