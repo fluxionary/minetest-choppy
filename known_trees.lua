@@ -246,6 +246,13 @@ if has_mod("ethereal") then
 		},
 	})
 
+	api.register_tree("ethereal:scorched", {
+		shape = { type = "box", box = vector.new(1, 6, 1) },
+		nodes = {
+			["ethereal:scorched_tree"] = "trunk",
+		},
+	})
+
 	api.add_nodes_to_tree("default:tree", {
 		["ethereal:orange_leaves"] = "leaves",
 		["ethereal:orange"] = "fruit",
