@@ -81,17 +81,6 @@ if has_mod("clementinetree") then
 	})
 end
 
-if has_mod("clementinetree") then
-	api.register_tree("cooltrees:clementinetree", {
-		shape = { type = "box", box = vector.new(5, 6, 5) },
-		nodes = {
-			["clementinetree:trunk"] = "trunk",
-			["clementinetree:leaves"] = "leaves",
-			["clementinetree:clementine"] = "fruit",
-		},
-	})
-end
-
 if has_mod("default") then
 	api.register_tree("default:acacia_bush", {
 		shape = { type = "box", box = vector.new(3, 2, 3) },
@@ -196,14 +185,6 @@ if has_mod("ethereal") then
 		nodes = {
 			["ethereal:birch_trunk"] = "trunk",
 			["ethereal:birch_leaves"] = "leaves",
-		},
-	})
-
-	api.register_tree("ethereal:frost", {
-		shape = { type = "box", box = vector.new(8, 15, 8) },
-		nodes = {
-			["ethereal:frost_tree"] = "trunk",
-			["ethereal:frost_leaves"] = "leaves",
 		},
 	})
 
