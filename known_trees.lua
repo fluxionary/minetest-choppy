@@ -37,14 +37,17 @@ if has_mod("cacaotree") then
 end
 
 if has_mod("caverealms") then
-	api.register_tree("caverealms:mushroom", {
-		shape = { type = "box", box = vector.new(8, 11, 8) },
-		nodes = {
-			["caverealms:mushroom_stem"] = "trunk",
-			["caverealms:mushroom_cap"] = "trunk",
-			["caverealms:mushroom_gills"] = "trunk",
-		},
-	})
+	-- if ethereal is present, caverealms uses ethereal's nodes
+	if not has_mod("ethereal") then
+		api.register_tree("caverealms:mushroom", {
+			shape = { type = "box", box = vector.new(8, 11, 8) },
+			nodes = {
+				["caverealms:mushroom_stem"] = "trunk",
+				["caverealms:mushroom_cap"] = "trunk",
+				["caverealms:mushroom_gills"] = "leaves",
+			},
+		})
+	end
 end
 
 if has_mod("cherrytree") then
@@ -204,6 +207,7 @@ if has_mod("ethereal") then
 		},
 	})
 
+	-- ethereal has a hard dependency on default, this will always exist
 	api.add_nodes_to_tree("default:tree", {
 		["ethereal:lemon_leaves"] = "leaves",
 		["ethereal:lemon"] = "fruit",
@@ -214,9 +218,15 @@ if has_mod("ethereal") then
 		nodes = {
 			["ethereal:mushroom_trunk"] = "trunk",
 			["ethereal:mushroom"] = "trunk",
-			["ethereal:mushroom_pore"] = "trunk",
+			["ethereal:mushroom_pore"] = "leaves",
 		},
 	})
+
+	if has_mod("caverealms") then
+		api.add_nodes_to_tree("ethereal:mushroom", {
+			["caverealms:mushroom_gills"] = "leaves",
+		})
+	end
 
 	api.register_tree("ethereal:olive", {
 		shape = { type = "box", box = vector.new(8, 9, 8) },
@@ -234,6 +244,7 @@ if has_mod("ethereal") then
 		},
 	})
 
+	-- ethereal has a hard dependency on default, this will always exist
 	api.add_nodes_to_tree("default:tree", {
 		["ethereal:orange_leaves"] = "leaves",
 		["ethereal:orange"] = "fruit",
