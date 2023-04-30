@@ -46,15 +46,15 @@ minetest.register_globalstep(function(dtime)
 	for _, player in ipairs(minetest.get_connected_players()) do
 		local player_name = player:get_player_name()
 		local process = api.get_process(player_name)
-		if
-			process
-			and (
+		if process then
+			if
 				not api.is_enabled(player)
-				or not api.is_wielding_axe(player)
 				or not api.player_in_bounds(player:get_pos(), process.start_pos, process.tree_shape)
-			)
-		then
-			api.stop_process(player_name)
+			then
+				api.stop_process(player_name)
+			else
+				process:set_paused(not api.is_wielding_axe(player), "no axe")
+			end
 		end
 	end
 

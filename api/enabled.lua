@@ -39,5 +39,5 @@ function api.is_enabled(player)
 	local control = player:get_player_control()
 	local toggled = api.get_toggled(player_name)
 
-	return (toggled and control.sneak) or (not toggled and not control.sneak)
+	return toggled == control.sneak
 end

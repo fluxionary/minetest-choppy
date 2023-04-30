@@ -41,11 +41,20 @@ function Process:_init(start_pos, player_name, tree_name)
 	self.seen = {}
 	self.elapsed = 0
 	self.nodes_chopped = 0
+	self.paused_by_source = {}
 	self.paused = false
 end
 
-function Process:set_paused(boolean)
-	self.paused = boolean
+function Process:set_paused(paused, source)
+	if not source then
+		error("set_paused requires a second argument, sorry, had to change the API")
+	end
+	if paused then
+		self.paused_by_source[source] = paused
+	else
+		self.paused_by_source[source] = nil
+	end
+	self.paused = next(self.paused_by_source) ~= nil
 end
 
 function Process:targets_remaining()
