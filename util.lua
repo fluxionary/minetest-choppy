@@ -1,17 +1,12 @@
 local get_dig_params = minetest.get_dig_params
 
-local dig_speed_multiplier = choppy.settings.dig_speed_multiplier
-local step_radius = choppy.settings.step_radius
-local leaves_mode = choppy.settings.leaves_mode
-local snappy_multiplier = choppy.settings.snappy_multiplier
-local choppy_cap_name = choppy.settings.choppy_cap_name
-local snappy_cap_name = choppy.settings.snappy_cap_name
+local s = choppy.settings
 
 local util = {}
 
 function util.get_neighbors(pos)
 	local v_new = vector.new
-	local sr = step_radius
+	local sr = s.step_radius
 	local x0, y0, z0 = pos.x, pos.y, pos.z
 	local ns = {}
 	for x = -sr, sr do
@@ -45,6 +40,8 @@ function util.get_neighbors_above(pos)
 		v_new(x0 + 1, y1, z0 - 1),
 		v_new(x0 + 1, y1, z0 + 1),
 	}
+	table.shuffle(ns, 2, 5)
+	table.shuffle(ns, 6, 9)
 	local i = 0
 	return function()
 		i = i + 1
@@ -54,27 +51,27 @@ end
 
 local function try_snappy_multiplier(toolcaps)
 	return (
-		leaves_mode == "snappy_multiplier"
+		s.leaves_mode == "snappy_multiplier"
 		and toolcaps
 		and toolcaps.groupcaps
-		and toolcaps.groupcaps[choppy_cap_name]
-		and not toolcaps.groupcaps[snappy_cap_name]
+		and toolcaps.groupcaps[s.choppy_cap_name]
+		and not toolcaps.groupcaps[s.snappy_cap_name]
 	)
 end
 
 local function get_snappy_caps(toolcaps)
-	local choppy_caps = toolcaps.groupcaps[choppy_cap_name]
+	local choppy_caps = toolcaps.groupcaps[s.choppy_cap_name]
 	local snappy_caps = {
 		times = {},
-		uses = choppy_caps.uses * snappy_multiplier,
+		uses = choppy_caps.uses * s.snappy_multiplier,
 		maxlevel = choppy_caps.maxlevel,
 	}
 	for k, time in pairs(choppy_caps.times) do
-		snappy_caps.times[k] = time / snappy_multiplier
+		snappy_caps.times[k] = time / s.snappy_multiplier
 	end
 	return {
 		groupcaps = {
-			[snappy_cap_name] = snappy_caps,
+			[s.snappy_cap_name] = snappy_caps,
 		},
 	}
 end
@@ -91,12 +88,14 @@ function util.get_dig_time_and_wear(node_name, wielded, hand)
 
 	local dig_params = get_dig_params(node_groups, wielded_caps, wielded_wear)
 	if dig_params.diggable then
-		return dig_params.time / dig_speed_multiplier, dig_params.wear
+		local dig_time = dig_params.time / s.dig_speed_multiplier
+		dig_time = math.max(dig_time, 1 / s.max_trunks_per_second)
+		return dig_time, dig_params.wear
 	elseif try_snappy_multiplier(wielded_caps) then
 		local snappy_caps = get_snappy_caps(wielded_caps)
 		dig_params = get_dig_params(node_groups, snappy_caps, wielded_wear)
 		if dig_params.diggable then
-			return dig_params.time / dig_speed_multiplier, dig_params.wear
+			return dig_params.time / s.dig_speed_multiplier, dig_params.wear
 		end
 	end
 
@@ -104,7 +103,7 @@ function util.get_dig_time_and_wear(node_name, wielded, hand)
 	dig_params = get_dig_params(node_def.groups or {}, hand:get_tool_capabilities(), hand:get_wear())
 
 	if dig_params.diggable then
-		return dig_params.time / dig_speed_multiplier, 0
+		return dig_params.time / s.dig_speed_multiplier, 0
 	end
 end
 

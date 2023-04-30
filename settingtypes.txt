@@ -18,7 +18,10 @@ choppy.leaves_mode (leaf removal mode) enum snappy_multiplier intrinsic,snappy_m
 choppy.snappy_multiplier (snappy multiplier) float 5
 
 # name of the choppy (wood cutting) toolcap for snappy_multiplier leaves mode
-choppy.choppy_cap_name () string choppy
+choppy.choppy_cap_name (choppy toolcap name) string choppy
 
 # name of the snappy (leaf cutting) toolcap for snappy_multiplier leaves mode
-choppy.snappy_cap_name () string snappy
+choppy.snappy_cap_name (snappy toolcap name) string snappy
+
+# throttle the number of trunks cut per second to this value or lower.
+choppy.max_trunks_per_second (maximum trunks per second) float 20 0.01
