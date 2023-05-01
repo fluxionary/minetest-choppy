@@ -5,7 +5,7 @@ choppy.halo_size (halo size) int 1 0 65535
 choppy.player_scale (player scale) float 1.1 0.5
 
 # radius to search for more tree nodes
-choppy.step_radius (search radius) int 2 1
+choppy.step_radius (search radius) int 1 1
 
 # 2 means "twice as fast"; 0.5 means "half as fast".
 choppy.dig_speed_multiplier (dig speed multiplier) float 1 0.001 1000
@@ -25,3 +25,8 @@ choppy.snappy_cap_name (snappy toolcap name) string snappy
 
 # throttle the number of trunks cut per second to this value or lower.
 choppy.max_trunks_per_second (maximum trunks per second) float 20 0.01
+
+# what to do w/ nodes that are dug.
+# default: usually this means the items are added to the player's inventory, unless overridden by another mod.
+# add_item: drops the nodes as items in the world.
+choppy.handle_drop_behavior (handle drop behavior) enum default default,add_item

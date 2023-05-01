@@ -43,6 +43,7 @@ function Process:_init(start_pos, player_name, tree_name)
 	self.nodes_chopped = 0
 	self.paused_by_source = {}
 	self.paused = false
+	self.is_digging = false
 end
 
 function Process:set_paused(paused, source)
@@ -223,6 +224,7 @@ function Process:on_globalstep(dtime, player)
 				return
 			end
 
+			self.is_digging = true
 			if has_staminoid and should_disable_staminoid(node.name) then
 				-- if node is not a trunk, temporarily disable staminoid
 				staminoid_disabled_by_player_name[player_name] = true
@@ -231,6 +233,8 @@ function Process:on_globalstep(dtime, player)
 			else
 				node_dig(pos, node, player)
 			end
+			self.is_digging = false
+
 			self.nodes_chopped = self.nodes_chopped + 1
 			play_sound(pos, node.name)
 			wielded = player:get_wielded_item()
