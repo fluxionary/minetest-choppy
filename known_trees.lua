@@ -37,8 +37,9 @@ if has_mod("cacaotree") then
 end
 
 if has_mod("caverealms") then
-	-- if ethereal is present, caverealms uses ethereal's nodes
-	if not has_mod("ethereal") then
+	-- if ethereal is present, some versions of caverealms_lite uses ethereal's nodes; see ethereal mushroom for
+	-- additional logic
+	if minetest.registered_nodes["caverealms:mushroom_stem"] then
 		api.register_tree("caverealms:mushroom", {
 			shape = { type = "box", box = vector.new(8, 11, 8) },
 			nodes = {
