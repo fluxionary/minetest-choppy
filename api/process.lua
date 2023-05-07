@@ -6,13 +6,14 @@ local get_neighbors = choppy.util.get_neighbors
 
 local api = choppy.api
 
-local has_staminoid = choppy.has.staminoid
-
 api.process_by_player = {}
 
 api.registered_on_choppy_starts = {}
 api.registered_on_choppy_stops = {}
-api.registered_on_before_chops = {}
+
+api.registered_check_before_chops = {}
+api.registered_before_chops = {}
+api.registered_after_chops = {}
 
 function api.register_on_choppy_start(callback)
 	table.insert(api.registered_on_choppy_starts, callback)
@@ -22,8 +23,16 @@ function api.register_on_choppy_stop(callback)
 	table.insert(api.registered_on_choppy_stops, callback)
 end
 
-function api.register_on_before_chop(callback)
-	table.insert(api.registered_on_before_chops, callback)
+function api.register_check_before_chop(callback)
+	table.insert(api.registered_check_before_chops, callback)
+end
+
+function api.register_before_chop(callback)
+	table.insert(api.registered_before_chops, callback)
+end
+
+function api.register_after_chop(callback)
+	table.insert(api.registered_after_chops, callback)
 end
 
 local Process = futil.class1()
@@ -162,27 +171,12 @@ local function play_sound(pos, node_name)
 	}, true)
 end
 
-local staminoid_disabled_by_player_name = {}
-local function should_disable_staminoid(node_name)
-	return minetest.get_item_group(node_name, "choppy") == 0
-end
-
-if has_staminoid then
-	staminoid.register_on_exhaust_player(function(player, amount, reason)
-		local player_name = player:get_player_name()
-		if staminoid_disabled_by_player_name[player_name] and reason == "dig" then
-			return 0
-		end
-	end)
-end
-
 function Process:on_globalstep(dtime, player)
 	if self.paused then
 		return
 	end
 
 	local elapsed
-	local player_name = player:get_player_name()
 	local wielded = player:get_wielded_item()
 	local hand = player:get_inventory():get_stack("hand", 1)
 	local positions = self.positions
@@ -193,55 +187,52 @@ function Process:on_globalstep(dtime, player)
 		self.current_pos = pos
 		local node = get_node(pos)
 
-		local cancel_dig = false
-		for _, callback in ipairs(api.registered_on_before_chops) do
+		local skip_node = false
+		for _, callback in ipairs(api.registered_check_before_chops) do
 			if callback(self, player, pos, node) then
-				cancel_dig = true
+				skip_node = true
 				break
 			end
 		end
 
-		if cancel_dig then
-			break
-		end
+		if not skip_node then
+			local dig_time, wear = get_dig_time_and_wear(node.name, wielded, hand)
 
-		local dig_time, wear = get_dig_time_and_wear(node.name, wielded, hand)
+			if dig_time then
+				if not elapsed then
+					-- this is initialized here so that we don't advance the timer if a dig event is cancelled
+					elapsed = (self.elapsed or 0) + dtime
+				end
 
-		if dig_time then
-			if not elapsed then
-				-- this is initialized here so that we don't advance the timer if a dig event is cancelled
-				elapsed = (self.elapsed or 0) + dtime
-			end
+				if dig_time > elapsed then
+					-- not enough time has elapsed to dig another node
+					positions:push_front(pos) -- put it back at the front of the queue
+					break
+				end
 
-			if dig_time > elapsed then
-				-- not enough time has elapsed to dig another node
-				positions:push_front(pos) -- put it back at the front of the queue
-				break
-			end
+				if wielded:get_wear() + wear >= 65536 then
+					api.stop_process(self.player_name)
+					return
+				end
 
-			if wielded:get_wear() + wear >= 65536 then
-				api.stop_process(self.player_name)
-				return
-			end
-
-			self.is_digging = true
-			if has_staminoid and should_disable_staminoid(node.name) then
-				-- if node is not a trunk, temporarily disable staminoid
-				staminoid_disabled_by_player_name[player_name] = true
+				for _, callback in ipairs(api.registered_before_chops) do
+					callback(self, player, pos, node)
+				end
+				self.is_digging = true
 				node_dig(pos, node, player)
-				staminoid_disabled_by_player_name[player_name] = nil
-			else
-				node_dig(pos, node, player)
-			end
-			self.is_digging = false
+				self.is_digging = false
+				for _, callback in ipairs(api.registered_after_chops) do
+					callback(self, player, pos, node)
+				end
 
-			self.nodes_chopped = self.nodes_chopped + 1
-			play_sound(pos, node.name)
-			wielded = player:get_wielded_item()
-			elapsed = elapsed - dig_time
+				self.nodes_chopped = self.nodes_chopped + 1
+				play_sound(pos, node.name)
+				wielded = player:get_wielded_item()
+				elapsed = elapsed - dig_time
 
-			if self.paused then
-				break
+				if self.paused then
+					break
+				end
 			end
 		end
 

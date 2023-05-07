@@ -7,3 +7,25 @@ staminoid.register_on_exhaust_player(function(player, amount, reason)
 		end
 	end
 end)
+
+-- don't exhaust when cutting non-choppy nodes (leaves)
+local staminoid_disabled_by_player_name = {}
+local function should_disable_staminoid(node_name)
+	return minetest.get_item_group(node_name, choppy.settings.choppy_cap_name) == 0
+end
+
+choppy.api.register_on_before_chop(function(self, player, pos, node)
+	if should_disable_staminoid(node.name) then
+		staminoid_disabled_by_player_name[player:get_player_name()] = true
+	end
+end)
+choppy.api.register_on_before_chop(function(self, player, pos, node)
+	staminoid_disabled_by_player_name[player:get_player_name()] = nil
+end)
+
+staminoid.register_on_exhaust_player(function(player, amount, reason)
+	local player_name = player:get_player_name()
+	if staminoid_disabled_by_player_name[player_name] and reason == "dig" then
+		return 0
+	end
+end)
