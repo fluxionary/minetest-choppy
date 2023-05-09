@@ -48,13 +48,6 @@ minetest.register_globalstep(function(dtime)
 			local wielded_def = wielded_item:get_definition()
 			local tool_range = (wielded_def.range or 4) + halo_size
 			local in_bounds = api.player_in_bounds(player:get_pos(), process.base_pos, process.tree_shape, tool_range)
-			minetest.chat_send_all(
-				string.format(
-					"[DEBUG] in_bounds=%s %.1f",
-					in_bounds,
-					vector.distance(player:get_pos(), process.base_pos)
-				)
-			)
 
 			if not api.is_enabled(player) or not in_bounds then
 				api.stop_process(player_name)
