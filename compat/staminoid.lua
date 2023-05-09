@@ -14,12 +14,13 @@ local function should_disable_staminoid(node_name)
 	return minetest.get_item_group(node_name, choppy.settings.choppy_cap_name) == 0
 end
 
-choppy.api.register_on_before_chop(function(self, player, pos, node)
+choppy.api.register_before_chop(function(self, player, pos, node)
 	if should_disable_staminoid(node.name) then
 		staminoid_disabled_by_player_name[player:get_player_name()] = true
 	end
 end)
-choppy.api.register_on_before_chop(function(self, player, pos, node)
+
+choppy.api.register_after_chop(function(self, player, pos, node)
 	staminoid_disabled_by_player_name[player:get_player_name()] = nil
 end)
 
