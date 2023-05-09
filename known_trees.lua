@@ -176,7 +176,7 @@ if has_mod("ethereal") then
 	})
 
 	api.register_tree("ethereal:banana", {
-		shape = { type = "box", box = vector.new(3, 16, 3) },
+		shape = { type = "box", box = vector.new(7, 8, 7) },
 		nodes = {
 			["ethereal:banana_trunk"] = "trunk",
 			["ethereal:bananaleaves"] = "leaves",
