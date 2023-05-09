@@ -3,6 +3,7 @@ local swap_node = minetest.swap_node
 local resolve_item = futil.resolve_item
 
 local api = choppy.api
+local halo_size = choppy.settings.halo_size
 
 minetest.register_on_dignode(function(pos, oldnode, digger)
 	if not api.is_tree_node(oldnode.name, "trunk") then
@@ -23,11 +24,7 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 
 	if api.is_wielding_axe(digger) and api.is_enabled(digger) then
 		local treetop = api.find_treetop(pos, oldnode, player_name)
-		if treetop then
-			api.start_process(digger, treetop, oldnode.name)
-		else
-			api.start_process(digger, pos, oldnode.name)
-		end
+		api.start_process(digger, pos, treetop or pos, oldnode.name)
 	end
 end)
 
@@ -47,10 +44,19 @@ minetest.register_globalstep(function(dtime)
 		local player_name = player:get_player_name()
 		local process = api.get_process(player_name)
 		if process then
-			if
-				not api.is_enabled(player)
-				or not api.player_in_bounds(player:get_pos(), process.start_pos, process.tree_shape)
-			then
+			local wielded_item = player:get_wielded_item()
+			local wielded_def = wielded_item:get_definition()
+			local tool_range = (wielded_def.range or 4) + halo_size
+			local in_bounds = api.player_in_bounds(player:get_pos(), process.base_pos, process.tree_shape, tool_range)
+			minetest.chat_send_all(
+				string.format(
+					"[DEBUG] in_bounds=%s %.1f",
+					in_bounds,
+					vector.distance(player:get_pos(), process.base_pos)
+				)
+			)
+
+			if not api.is_enabled(player) or not in_bounds then
 				api.stop_process(player_name)
 			else
 				process:set_paused(not api.is_wielding_axe(player), "no axe")

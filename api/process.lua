@@ -38,7 +38,8 @@ end
 local Process = futil.class1()
 api.Process = Process
 
-function Process:_init(start_pos, player_name, tree_name)
+function Process:_init(base_pos, start_pos, player_name, tree_name)
+	self.base_pos = base_pos
 	self.start_pos = start_pos
 	self.current_pos = start_pos
 	self.player_name = player_name
@@ -110,7 +111,7 @@ function Process:get_next_valid_target()
 end
 
 function Process:should_add_position(pos, hash)
-	return not self.seen[hash] and api.in_bounds(pos, self.start_pos, self.tree_shape) and self:is_valid_target(pos)
+	return not self.seen[hash] and api.in_bounds(pos, self.base_pos, self.tree_shape) and self:is_valid_target(pos)
 end
 
 function Process:step_fringe()
@@ -246,10 +247,10 @@ function api.get_process(player_name)
 	return api.process_by_player[player_name]
 end
 
-function api.start_process(player, start_pos, tree_node)
+function api.start_process(player, base_pos, start_pos, tree_node)
 	local player_name = player:get_player_name()
 	local tree_name = assert(api.trees_by_node[tree_node][1], string.format("%q is not a tree node", tree_node))
-	local process = Process(start_pos, player_name, tree_name)
+	local process = Process(base_pos, start_pos, player_name, tree_name)
 	local found_targets = process:step_fringe()
 	while found_targets == false do
 		found_targets = process:step_fringe()
@@ -258,7 +259,7 @@ function api.start_process(player, start_pos, tree_node)
 	if not process:is_complete() then
 		local abort_process = false
 		for _, callback in ipairs(api.registered_on_choppy_starts) do
-			if callback(process, player, start_pos, tree_node) then
+			if callback(process, player, tree_node) then
 				abort_process = true
 				break
 			end

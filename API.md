@@ -32,11 +32,11 @@
   register a tree "shape", which allows limited ways of preventing multiple trees from being felled simultaneously.
   def includes two callbacks:
 
-  * `in_bounds = function(pos, start_pos, shape)`
+  * `in_bounds = function(pos, base_pos, shape)`
 
     called for each node which may be chopped.
 
-  * `player_in_bounds = function(player_pos, start_pos, shape)`
+  * `player_in_bounds = function(player_pos, base_pos, shape)`
 
     called to check whether the player has wandered away from the tree
 

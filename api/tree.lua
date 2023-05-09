@@ -22,27 +22,31 @@ function api.register_tree_shape(shape_name, def)
 	api.registered_tree_shapes[shape_name] = def
 end
 
-function api.in_bounds(pos, start_pos, shape)
-	return api.registered_tree_shapes[shape.type].in_bounds(pos, start_pos, shape)
+function api.in_bounds(pos, base_pos, shape)
+	return api.registered_tree_shapes[shape.type].in_bounds(pos, base_pos, shape)
 end
 
-function api.player_in_bounds(player_pos, start_pos, shape)
-	return api.registered_tree_shapes[shape.type].player_in_bounds(player_pos, start_pos, shape)
+function api.player_in_bounds(player_pos, base_pos, shape, tool_range)
+	tool_range = tool_range or (4 + halo_size)
+	if vector.distance(player_pos, base_pos) <= tool_range then
+		return true
+	end
+	return api.registered_tree_shapes[shape.type].player_in_bounds(player_pos, base_pos, shape)
 end
 
 api.register_tree_shape("box", {
-	in_bounds = function(pos, start_pos, shape)
+	in_bounds = function(pos, base_pos, shape)
 		local box = shape.box
-		return abs(pos.x - start_pos.x) <= (box.x - 1 + halo_size)
-			and abs(pos.y - start_pos.y) <= (box.y - 1 + halo_size)
-			and abs(pos.z - start_pos.z) <= (box.z - 1 + halo_size)
+		return abs(pos.x - base_pos.x) <= (box.x - 1 + halo_size)
+			and abs(pos.y - base_pos.y) <= (box.y - 1 + halo_size)
+			and abs(pos.z - base_pos.z) <= (box.z - 1 + halo_size)
 	end,
 
-	player_in_bounds = function(player_pos, start_pos, shape)
+	player_in_bounds = function(player_pos, base_pos, shape)
 		local box = shape.box
-		return abs(player_pos.x - start_pos.x) <= (box.x * player_scale)
-			and abs(player_pos.y - start_pos.y) <= (box.y * player_scale)
-			and abs(player_pos.z - start_pos.z) <= (box.z * player_scale)
+		return abs(player_pos.x - base_pos.x) <= (box.x * player_scale)
+			and abs(player_pos.y - base_pos.y) <= (box.y * player_scale)
+			and abs(player_pos.z - base_pos.z) <= (box.z * player_scale)
 	end,
 })
 
@@ -135,7 +139,7 @@ function api.get_tree_image(tree_name)
 	end
 end
 
-function api.find_treetop(start_pos, node, player_name)
+function api.find_treetop(base_pos, node, player_name)
 	local node_name = node.name
 	local tree_name, node_kind = api.get_tree_and_kind(node_name)
 	if not (tree_name and node_kind == "trunk") then
@@ -143,7 +147,7 @@ function api.find_treetop(start_pos, node, player_name)
 	end
 	local tree_def = api.registered_trees[tree_name]
 	local tree_shape = tree_def.shape
-	local fringe = { start_pos }
+	local fringe = { base_pos }
 	local seen = {}
 	local registered_nodes = minetest.registered_nodes
 
@@ -168,7 +172,7 @@ function api.find_treetop(start_pos, node, player_name)
 	end
 
 	local function should_add_position(pos, hash)
-		return not seen[hash] and api.in_bounds(pos, start_pos, tree_shape) and is_valid_target(pos)
+		return not seen[hash] and api.in_bounds(pos, base_pos, tree_shape) and is_valid_target(pos)
 	end
 
 	-- search upward and outward
@@ -205,7 +209,7 @@ function api.find_treetop(start_pos, node, player_name)
 			return v_distance(a, centroid) < v_distance(b, centroid)
 		end)
 		local to_return = fringe[1]
-		if not vector.equals(start_pos, to_return) then
+		if not vector.equals(base_pos, to_return) then
 			return to_return
 		end
 	end
