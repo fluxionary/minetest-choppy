@@ -11,7 +11,7 @@
   returns "true" if choppy mode is enabled for a player. this means that existing processes will continue,
   and new processes can be started.
 
-* `choppy.api.toggle_enabled(player_name)`
+* `choppy.api.toggle_sneak_enabled(player_name)`
 
   toggles whether the player has to hold down "sneak" to enable choppy, or whether it will be enabled by default.
 

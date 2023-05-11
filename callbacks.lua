@@ -5,6 +5,21 @@ local resolve_item = futil.resolve_item
 local api = choppy.api
 local halo_size = choppy.settings.halo_size
 
+minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
+	if not api.is_tree_node(node.name, "trunk") then
+		-- not a tree trunk
+		return
+	end
+
+	if not minetest.is_player(puncher) then
+		return
+	end
+
+	if api.is_wielding_axe(puncher) and not api.is_initialized(puncher) then
+		choppy.show_first_use_form(puncher)
+	end
+end)
+
 minetest.register_on_dignode(function(pos, oldnode, digger)
 	if not api.is_tree_node(oldnode.name, "trunk") then
 		-- not a tree trunk
@@ -15,15 +30,13 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 		return
 	end
 
-	local player_name = digger:get_player_name()
-
-	if api.get_process(player_name) then
+	if api.get_process(digger) then
 		-- already cutting
 		return
 	end
 
 	if api.is_wielding_axe(digger) and api.is_enabled(digger) then
-		local treetop = api.find_treetop(pos, oldnode, player_name)
+		local treetop = api.find_treetop(pos, oldnode, digger)
 		api.start_process(digger, pos, treetop or pos, oldnode.name)
 	end
 end)
@@ -61,13 +74,11 @@ minetest.register_globalstep(function(dtime)
 end)
 
 minetest.register_on_leaveplayer(function(player, timed_out)
-	local player_name = player:get_player_name()
-	api.stop_process(player_name)
+	api.stop_process(player)
 end)
 
 minetest.register_on_dieplayer(function(player, reason)
-	local player_name = player:get_player_name()
-	api.stop_process(player_name)
+	api.stop_process(player)
 end)
 
 minetest.register_on_mods_loaded(function()

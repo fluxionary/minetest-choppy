@@ -140,6 +140,9 @@ function api.get_tree_image(tree_name)
 end
 
 function api.find_treetop(base_pos, node, player_name)
+	if type(player_name) ~= "string" then
+		player_name = player_name:get_player_name()
+	end
 	local node_name = node.name
 	local tree_name, node_kind = api.get_tree_and_kind(node_name)
 	if not (tree_name and node_kind == "trunk") then

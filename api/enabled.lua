@@ -7,37 +7,95 @@ local is_yes = minetest.is_yes
 
 local api = choppy.api
 
-local cache = {}
+local sneak_enable_cache = {}
 
-local function toggled_key(player_name)
+local function sneak_enable_key(player_name)
 	return f("toggled:%s", player_name)
 end
 
-function api.get_toggled(player_name)
-	local toggled = cache[player_name]
-	if toggled == nil then
-		toggled = is_yes(mod_storage:get(toggled_key(player_name)))
-		cache[player_name] = toggled
+function api.get_sneak_enable(player_name)
+	if type(player_name) ~= "string" then
+		player_name = player_name:get_player_name()
 	end
-	return toggled
+
+	local sneak_enable = sneak_enable_cache[player_name]
+	if sneak_enable == nil then
+		sneak_enable = is_yes(mod_storage:get(sneak_enable_key(player_name)))
+		sneak_enable_cache[player_name] = sneak_enable
+	end
+	return sneak_enable
 end
 
-function api.toggle_enabled(player_name)
-	local key = toggled_key(player_name)
-	local toggled = not api.get_toggled(player_name)
-	if toggled then
-		mod_storage:set_string(key, "y")
-	else
-		mod_storage:set_string(key, "")
+api.get_toggled = api.get_sneak_enable -- backwards compatibility
+
+function api.set_sneak_enable(player_name, sneak_enable)
+	if type(player_name) ~= "string" then
+		player_name = player_name:get_player_name()
 	end
-	cache[player_name] = toggled
-	return toggled
+
+	local key = sneak_enable_key(player_name)
+	mod_storage:set_string(key, sneak_enable and "y" or "")
+	sneak_enable_cache[player_name] = sneak_enable
+	return sneak_enable
+end
+
+function api.toggle_sneak_enable(player_name)
+	if type(player_name) ~= "string" then
+		player_name = player_name:get_player_name()
+	end
+
+	local key = sneak_enable_key(player_name)
+	local sneak_enable = sneak_enable_cache[player_name]
+	if sneak_enable == nil then
+		sneak_enable = is_yes(mod_storage:get(key))
+	end
+
+	sneak_enable = not sneak_enable
+
+	mod_storage:set_string(key, sneak_enable and "y" or "")
+	sneak_enable_cache[player_name] = sneak_enable
+	return sneak_enable
+end
+
+api.toggle_enabled = api.toggle_sneak_enable -- backwards compatibility
+
+local initialized_cache = {}
+
+local function initialized_key(player_name)
+	return f("initialized:%s", player_name)
+end
+
+function api.is_initialized(player_name)
+	if type(player_name) ~= "string" then
+		player_name = player_name:get_player_name()
+	end
+
+	local initialized = initialized_cache[player_name]
+	if initialized == nil then
+		local key = initialized_key(player_name)
+		initialized = is_yes(mod_storage:get(key))
+		initialized_cache[player_name] = initialized
+	end
+	return initialized
+end
+
+function api.set_initialized(player_name)
+	if type(player_name) ~= "string" then
+		player_name = player_name:get_player_name()
+	end
+
+	local key = initialized_key(player_name)
+	mod_storage:set_string(key, "y")
+	initialized_cache[player_name] = true
 end
 
 function api.is_enabled(player)
-	local player_name = player:get_player_name()
-	local control = player:get_player_control()
-	local toggled = api.get_toggled(player_name)
+	if not api.is_initialized(player) then
+		return false
+	end
 
-	return toggled == control.sneak
+	local control = player:get_player_control()
+	local sneak_enable = api.get_sneak_enable(player)
+
+	return sneak_enable == control.sneak
 end

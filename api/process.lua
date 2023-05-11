@@ -39,6 +39,9 @@ local Process = futil.class1()
 api.Process = Process
 
 function Process:_init(base_pos, start_pos, player_name, tree_name)
+	if type(player_name) ~= "string" then
+		player_name = player_name:get_player_name()
+	end
 	self.base_pos = base_pos
 	self.start_pos = start_pos
 	self.current_pos = start_pos
@@ -244,13 +247,15 @@ function Process:on_globalstep(dtime, player)
 end
 
 function api.get_process(player_name)
+	if type(player_name) ~= "string" then
+		player_name = player_name:get_player_name()
+	end
 	return api.process_by_player[player_name]
 end
 
 function api.start_process(player, base_pos, start_pos, tree_node)
-	local player_name = player:get_player_name()
 	local tree_name = assert(api.trees_by_node[tree_node][1], string.format("%q is not a tree node", tree_node))
-	local process = Process(base_pos, start_pos, player_name, tree_name)
+	local process = Process(base_pos, start_pos, player, tree_name)
 	local found_targets = process:step_fringe()
 	while found_targets == false do
 		found_targets = process:step_fringe()
@@ -266,12 +271,16 @@ function api.start_process(player, base_pos, start_pos, tree_node)
 		end
 
 		if not abort_process then
+			local player_name = player:get_player_name()
 			api.process_by_player[player_name] = process
 		end
 	end
 end
 
 function api.stop_process(player_name)
+	if type(player_name) ~= "string" then
+		player_name = player_name:get_player_name()
+	end
 	api.process_by_player[player_name] = nil
 
 	for _, callback in ipairs(api.registered_on_choppy_stops) do
