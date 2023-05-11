@@ -55,20 +55,22 @@ function Process:_init(base_pos, start_pos, player_name, tree_name)
 	self.elapsed = 0
 	self.nodes_chopped = 0
 	self.paused_by_source = {}
-	self.paused = false
 	self.is_digging = false
 end
 
 function Process:set_paused(paused, source)
 	if not source then
-		error("set_paused requires a second argument, sorry, had to change the API")
+		error("set_paused requires a second argument to allow pauses for multiple reasons.")
 	end
 	if paused then
 		self.paused_by_source[source] = paused
 	else
 		self.paused_by_source[source] = nil
 	end
-	self.paused = next(self.paused_by_source) ~= nil
+end
+
+function Process:is_paused()
+	return next(self.paused_by_source) ~= nil
 end
 
 function Process:targets_remaining()
@@ -176,7 +178,7 @@ local function play_sound(pos, node_name)
 end
 
 function Process:on_globalstep(dtime, player)
-	if self.paused then
+	if self:is_paused() then
 		return
 	end
 
@@ -234,7 +236,7 @@ function Process:on_globalstep(dtime, player)
 				wielded = player:get_wielded_item()
 				elapsed = elapsed - dig_time
 
-				if self.paused then
+				if self:is_paused() then
 					break
 				end
 			end

@@ -12,21 +12,19 @@ choppy.text_hud = futil.define_hud("choppy:text", {
 		end
 
 		local tree_name = process.tree_name
-		local text
+		local text_parts = {
+			S("chopping @1", tree_name),
+			S("@2 chopped, at least @3 remaining", process.nodes_chopped, process:targets_remaining()),
+		}
+
 		if api.get_sneak_enable(player_name) then
-			text = S(
-				"chopping @1\n@2 chopped, at least @3 remaining\nrelease SNEAK to stop",
-				tree_name,
-				process.nodes_chopped,
-				process:targets_remaining()
-			)
+			table.insert(text_parts, S("release SNEAK to stop"))
 		else
-			text = S(
-				"chopping @1\n@2 chopped, at least @3 remaining\npress & hold SNEAK to stop",
-				tree_name,
-				process.nodes_chopped,
-				process:targets_remaining()
-			)
+			table.insert(text_parts, S("press & hold SNEAK to stop"))
+		end
+
+		if process:is_paused() then
+			table.insert(text_parts, S("chopping is paused"))
 		end
 
 		return {
@@ -35,7 +33,7 @@ choppy.text_hud = futil.define_hud("choppy:text", {
 			alignment = { x = 0, y = 0 },
 			offset = { x = 0, y = 0 },
 			number = 0xFFFFFF,
-			text = text,
+			text = table.concat(text_parts, "\n"),
 		}
 	end,
 })
