@@ -14,7 +14,7 @@ choppy.text_hud = futil.define_hud("choppy:text", {
 		local tree_name = process.tree_name
 		local text_parts = {
 			S("chopping @1", tree_name),
-			S("@2 chopped, at least @3 remaining", process.nodes_chopped, process:targets_remaining()),
+			S("@1 chopped, at least @2 remaining", process.nodes_chopped, process:targets_remaining()),
 		}
 
 		if api.get_sneak_enable(player_name) then
