@@ -107,4 +107,29 @@ function util.get_dig_time_and_wear(node_name, wielded, hand)
 	end
 end
 
+function util.will_digging_break_tool(node_name, wielded)
+	local node_def = minetest.registered_nodes[node_name]
+	if not node_def then
+		return
+	end
+
+	local node_groups = node_def.groups or {}
+	local wielded_caps = wielded:get_tool_capabilities()
+	local wielded_wear = wielded:get_wear()
+
+	local dig_params = get_dig_params(node_groups, wielded_caps, wielded_wear)
+	local added_wear
+	if dig_params.diggable then
+		added_wear = dig_params.wear
+	elseif try_snappy_multiplier(wielded_caps) then
+		local snappy_caps = get_snappy_caps(wielded_caps)
+		dig_params = get_dig_params(node_groups, snappy_caps, wielded_wear)
+		if dig_params.diggable then
+			added_wear = dig_params.wear
+		end
+	end
+
+	return added_wear and wielded_wear + added_wear >= 65536
+end
+
 choppy.util = util

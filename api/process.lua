@@ -115,6 +115,21 @@ function Process:get_next_valid_target()
 	end
 end
 
+function Process:peek_next_valid_target()
+	local positions = self.positions
+	self:ensure_positions()
+	local pos = positions:pop_front()
+	while pos do
+		if self:is_valid_target(pos) then
+			positions:push_front(pos)
+			return pos
+		else
+			self:ensure_positions()
+			pos = positions:pop_front()
+		end
+	end
+end
+
 function Process:should_add_position(pos, hash)
 	return not self.seen[hash] and api.in_bounds(pos, self.base_pos, self.tree_shape) and self:is_valid_target(pos)
 end
@@ -217,7 +232,7 @@ function Process:on_globalstep(dtime, player)
 				end
 
 				if wielded:get_wear() + wear >= 65536 then
-					api.stop_process(self.player_name)
+					self:set_paused(true, "no axe")
 					return
 				end
 

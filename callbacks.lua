@@ -4,6 +4,7 @@ local resolve_item = futil.resolve_item
 
 local api = choppy.api
 local halo_size = choppy.settings.halo_size
+local will_digging_break_tool = choppy.util.will_digging_break_tool
 
 minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
 	if not api.is_tree_node(node.name, "trunk") then
@@ -65,7 +66,22 @@ minetest.register_globalstep(function(dtime)
 			if not api.is_enabled(player) or not in_bounds then
 				api.stop_process(player_name)
 			else
-				process:set_paused(not api.is_wielding_axe(player), "no axe")
+				local paused = false
+
+				if not api.is_wielding_axe(player) then
+					paused = true
+					process:set_paused(true, "no axe")
+				else
+					local next_pos = process:peek_next_valid_target()
+					if next_pos then
+						local next_node = minetest.get_node(next_pos).name
+						if will_digging_break_tool(next_node, wielded_item) then
+							paused = true
+						end
+					end
+				end
+
+				process:set_paused(paused, "no axe")
 			end
 		end
 	end
