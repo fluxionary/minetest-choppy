@@ -88,6 +88,10 @@ function Process:is_valid_target(pos)
 
 	local node = get_node(pos)
 	local node_name = node.name
+	if node.name == "air" and vector.equals(pos, self.base_pos) then
+		return "base_pos"
+	end
+
 	local node_type = api.is_same_tree(self.tree_name, node_name)
 	if not node_type then
 		return false
