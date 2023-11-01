@@ -1,4 +1,4 @@
-futil.check_version({ year = 2023, month = 3, day = 26 })
+futil.check_version({ year = 2023, month = 11, day = 1 }) -- is_player
 
 choppy = fmod.create()
 

@@ -12,7 +12,7 @@ minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
 		return
 	end
 
-	if not minetest.is_player(puncher) then
+	if not futil.is_player(puncher) then
 		return
 	end
 
@@ -27,7 +27,7 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 		return
 	end
 
-	if not minetest.is_player(digger) then
+	if not futil.is_player(digger) then
 		return
 	end
 

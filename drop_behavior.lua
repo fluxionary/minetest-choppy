@@ -1,7 +1,7 @@
 if choppy.settings.handle_drop_behavior == "add_item" then
 	local old_handle_node_drops = minetest.handle_node_drops
 	function minetest.handle_node_drops(pos, drops, player)
-		if not minetest.is_player(player) then
+		if not futil.is_player(player) then
 			return old_handle_node_drops(pos, drops, player)
 		end
 		local player_name = player:get_player_name()
