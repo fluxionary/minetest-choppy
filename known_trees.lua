@@ -448,7 +448,7 @@ if has_mod("moretrees") then
 	})
 
 	api.register_tree("moretrees:douglas_fir", {
-		shape = { type = "box", box = vector.new(7, 22, 7) },
+		shape = { type = "box", box = vector.new(7, 28, 7) },
 		nodes = {
 			["moretrees:fir_trunk"] = "trunk",
 			["moretrees:fir_leaves"] = "leaves",
