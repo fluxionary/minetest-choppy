@@ -123,6 +123,8 @@ if has_mod("default") then
 		nodes = {
 			["default:jungletree"] = "trunk",
 			["default:jungleleaves"] = "leaves",
+			["vines:vine_end"] = "fruit",
+			["vines:vine_middle"] = "fruit",
 		},
 	})
 
@@ -464,6 +466,8 @@ if has_mod("moretrees") then
 			["default:jungleleaves"] = "leaves",
 			["moretrees:jungletree_leaves_red"] = "leaves",
 			["moretrees:jungletree_leaves_yellow"] = "leaves",
+			["vines:vine_end"] = "fruit",
+			["vines:vine_middle"] = "fruit",
 		},
 	})
 
