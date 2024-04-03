@@ -46,7 +46,7 @@ minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack
 	local node_name = newnode.name
 	if api.is_tree_node(node_name) then
 		local def = minetest.registered_nodes[node_name]
-		if def.paramtype == "placed_by_player" then
+		if def._choppy_placed_by_player then
 			newnode.param1 = 1
 			swap_node(pos, newnode)
 		end
@@ -109,10 +109,10 @@ minetest.register_on_mods_loaded(function()
 
 				-- indicate that a node is natural or placed by a player
 				local node_def = minetest.registered_nodes[resolved]
-				local paramtype = node_def.paramtype
-				if not paramtype or paramtype == "" or paramtype == "none" then
+				local paramtype = node_def.paramtype or ""
+				if paramtype == "" or paramtype == "none" then
 					minetest.override_item(resolved, {
-						paramtype = "placed_by_player",
+						_choppy_placed_by_player = true,
 					})
 				end
 			end

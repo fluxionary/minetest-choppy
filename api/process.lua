@@ -98,7 +98,7 @@ function Process:is_valid_target(pos)
 	end
 
 	local def = minetest.registered_nodes[node_name] or {}
-	if def.paramtype == "placed_by_player" and node.param1 > 0 then
+	if def._choppy_placed_by_player and node.param1 > 0 then
 		return false
 	end
 

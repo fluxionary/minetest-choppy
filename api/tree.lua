@@ -167,7 +167,7 @@ function api.find_treetop(base_pos, node, player_name)
 		end
 
 		local def = registered_nodes[target_node_name] or {}
-		if def.paramtype == "placed_by_player" and target_node.param1 > 0 then
+		if def._choppy_placed_by_player and target_node.param1 > 0 then
 			return false
 		end
 
