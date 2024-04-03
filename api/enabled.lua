@@ -89,8 +89,46 @@ function api.set_initialized(player_name)
 	initialized_cache[player_name] = true
 end
 
+local disabled_cache = {}
+
+local function disabled_key(player_name)
+	return f("disabled:%s", player_name)
+end
+
+function api.is_disabled(player_name)
+	if type(player_name) ~= "string" then
+		player_name = player_name:get_player_name()
+	end
+
+	local disabled = disabled_cache[player_name]
+	if disabled == nil then
+		local key = disabled_key(player_name)
+		disabled = is_yes(mod_storage:get(key))
+		disabled_cache[player_name] = disabled
+	end
+	return disabled
+end
+
+function api.toggle_disabled(player_name)
+	if type(player_name) ~= "string" then
+		player_name = player_name:get_player_name()
+	end
+
+	local key = disabled_key(player_name)
+	local disabled = disabled_cache[player_name]
+	if disabled == nil then
+		disabled = is_yes(mod_storage:get(key))
+	end
+
+	disabled = not disabled
+
+	mod_storage:set_string(key, disabled and "y" or "")
+	disabled_cache[player_name] = disabled
+	return disabled
+end
+
 function api.is_enabled(player)
-	if not api.is_initialized(player) then
+	if api.is_disabled(player) or not api.is_initialized(player) then
 		return false
 	end
 

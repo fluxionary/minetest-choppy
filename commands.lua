@@ -22,3 +22,14 @@ minetest.register_chatcommand("visualize_choppy", {
 		end
 	end,
 })
+
+minetest.register_chatcommand("disable_choppy", {
+	description = S("toggles whether choppy is completely disabled or not"),
+	func = function(name)
+		if api.toggle_disabled(name) then
+			return true, S("choppy is now completely disabled")
+		else
+			return false, S("choppy is now enabled")
+		end
+	end,
+})
